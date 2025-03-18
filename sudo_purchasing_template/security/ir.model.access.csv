@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_template,access.purchase.template,model_purchase_template,,1,1,1,1
+access_purchase_template_line,access.purchase.template.line,model_purchase_template_line,,1,1,1,1

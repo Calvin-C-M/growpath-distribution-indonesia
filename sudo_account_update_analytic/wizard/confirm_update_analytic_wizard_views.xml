@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="confirm_update_analytic_wizard_form_view" model="ir.ui.view">
+        <field name="name">confirm.update.analytic.wizard.form.view</field>
+        <field name="model">confirm.update.analytic.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Warning">
+                <group>
+                    <p>Are you sure you want to update the analytic account?</p>
+                </group>
+                <footer>
+                    <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

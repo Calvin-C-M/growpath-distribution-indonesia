@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="update_analytic_wizard_form_view" model="ir.ui.view">
+        <field name="name">update.analytic.wizard.form.view</field>
+        <field name="model">update.analytic.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Update Analytic Account">
+                <group>
+                    <field name="account_id" widget="many2many_tags" />
+                    <field name="preview_analytic_distribution" widget="analytic_distribution" />
+                    <field name="analytic_distribution" widget="analytic_distribution" />
+                </group>
+                <footer>
+                    <button name="action_update_analytic_account" type="object" string="Update Journal Items" class="oe_highlight" />
+                    <button special="cancel" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="launch_update_analytic_wizard" model="ir.actions.act_window">
+        <field name="name">Update Analytic</field>
+        <field name="res_model">update.analytic.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="account.model_account_move_line" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>
