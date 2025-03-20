@@ -13,9 +13,12 @@
         'base',
         'purchase',
         'stock',
+        'purchase_request',
+        'purchase_request_tier_validation',
     ],
     'data': [
         'views/purchase_order_views_inherit.xml',
+        'views/purchase_request_views_inherit.xml',
         'views/stock_picking_views_inherit.xml',
     ],
     'installable': True,
