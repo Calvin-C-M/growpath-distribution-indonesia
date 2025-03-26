@@ -8,6 +8,10 @@
             <xpath expr="//field[@name='date_approve']" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
+            
+            <xpath expr="//field[@name='partner_id']" position="before">
+                <field name="is_downpayment_required" />
+            </xpath>
         </field>
     </record>
 </odoo>
