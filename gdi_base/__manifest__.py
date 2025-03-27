@@ -18,7 +18,6 @@
     ],
     'data': [
         'views/purchase_order_views_inherit.xml',
-        # 'views/purchase_request_views_inherit.xml',
         'views/stock_picking_views_inherit.xml',
     ],
     'installable': True,
