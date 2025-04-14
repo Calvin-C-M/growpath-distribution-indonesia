@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="stock_report_delivery_has_serial_move_line_inherit_delivery" inherit_id="stock.stock_report_delivery_has_serial_move_line">
+        <xpath expr="//td[1]" position="replace">
+            <td id="product" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                <span t-field="move_line.product_id.name"/>
+                <br/>
+                <t t-foreach="move_line.product_id.product_template_variant_value_ids" t-as="variant">
+                    <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
+                </t>
+            </td>
+        </xpath>
+    </template>
+
+    <template id="stock_report_delivery_aggregated_move_lines_inherit_delivery" inherit_id="stock.stock_report_delivery_aggregated_move_lines">
+        <xpath expr="//td[1]" position="replace">
+            <td>
+                <span t-esc="aggregated_lines[line]['product'].name"/>
+                <br/>
+                <t t-foreach="aggregated_lines[line]['product'].product_template_variant_value_ids" t-as="variant">
+                    <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
+                </t>
+            </td>
+        </xpath>
+        <xpath expr="//td[1]" position="before">
+            <td>
+                <t t-set="num" t-value="num+1"/>
+                <span t-esc="num"/>
+            </td>
+            <td>
+                <span t-esc="aggregated_lines[line]['product'].default_code"/>
+            </td>
+            
+        </xpath>
+        <xpath expr="//tr[1]" position="before">
+                <t t-set="num" t-value="0"/>
+        </xpath>
+    </template>
+
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <!-- Own template -->
+        <xpath expr="//t[1]" position="replace">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <style type="text/css">
+                    @font-face {
+                        font-family: "Times New Roman";
+                        src: url("/sh_thomas_reports/static/font/Times_New_Roman.ttf") format("truetype");
+                    }
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6,
+                    p,
+                    span,
+                    div,
+                    strong,
+                    b {
+                        font-family: "Times New Roman" !important;
+                    }
+                </style>
+
+                <t t-foreach="docs" t-as="o">
+                    <div class="row header">
+                        <div class="col-3">
+                            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height: 176px; width: 258px; justify-content: center; text-align: center;" alt="Logo"/>
+                        </div>
+                        <div class="col-3"/>
+                        <div class="col-6">
+                            <h2 style="margin-top: -15px; padding-bottom: 22px; font-family: 'Times New Roman';">
+                                <p style="font-size: 31.25px; font-family: 'Times New Roman';">Delivery Order</p>
+                            </h2>
+                           <div class="row">
+                               <div class="col-12">
+                                    <p style="font-size: 31.25px; font-family: 'Times New Roman';color: #800000;margin-left: 15px"><t t-esc="o.name"/></p>
+                                </div>
+                                <!--<div class="col-4">-->
+                                <!--    <div style="font-family: 'Times New Roman';">-->
+                                <!--    	<t t-if="o.vessel_id">-->
+                                <!--    		<h6 style="font-size: 13.12px; font-family: 'Times New Roman'; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">Project Name</h6>-->
+                                <!--    	</t>-->
+                                <!--    	<t t-elif="o.get_so()">-->
+                                <!--    		<h6 t-if="o.get_so().vessel_id" style="font-size: 13.12px; font-family: 'Times New Roman'; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">Project Name</h6>-->
+                                <!--    	</t>-->
+                                <!--    </div>-->
+                                <!--</div>-->
+                                <!--<div class="col-8">-->
+                                <!--    <div style="color:#800000;padding-left:30px;font-weight:bold">-->
+                                <!--    	<t t-if="o.vessel_id">-->
+                                <!--    		<p style="font-size: 13.12px; font-family: 'Times New Roman'; line-height: 13.12px; padding: 0px; margin-bottom: 5px;color: #800000; " t-esc="o.vessel_id.name"/>-->
+                                <!--    	</t>-->
+                                <!--    	<t t-elif="o.get_so().vessel_id">-->
+                                <!--    		<p t-if="o.get_so().vessel_id" style="font-size: 13.12px; font-family: 'Times New Roman'; line-height: 13.12px; padding: 0px; margin-bottom: 5px;color: #800000; " t-esc="o.get_so().vessel_id.name"/>-->
+                                <!--    	</t>-->
+                                        
+                                <!--    </div>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 style="font-family: 'Times New Roman'; font-size: 13.12px; font-weight: bold; margin-bottom: 5px; line-height: 13.12px;">Shipping Address</h6>
+                                <span t-if="o.partner_id.parent_id" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.partner_id.parent_id.name"/>
+                                <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.partner_id.name"/>
+                                <t t-if="o.partner_id.street"><span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.partner_id.street"/></t>
+                                <t t-if="o.partner_id.street2"><span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.partner_id.street2"/></t>
+                                <p style="margin-bottom: 5px; line-height: 13.12px;">
+                                    <t t-if="o.partner_id.city"> <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px;" t-esc="o.partner_id.city"/>, </t>
+                                    <t t-if="o.partner_id.state_id"> <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px;" t-esc="o.partner_id.state_id.name"/>, </t>
+                                    <t t-if="o.partner_id.zip">
+                                        <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px;" t-esc="o.partner_id.zip"/>
+                                    </t>
+                                </p>
+                                <t t-if="o.partner_id.country_id">
+                                    <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.partner_id.country_id.name"/>
+                                </t>
+                                <t t-if="o.partner_id.phone">
+                                    <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.partner_id.phone"/>
+                                </t>
+                            </div>
+                            <div class="col-3" style="flex: 0 0 20%; max-width: 20%;">
+                                <t t-if="o.scheduled_date">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Date</h6>
+                                </t>
+                                <t t-if="o.vessel_id">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Project Name</h6>
+                                </t>
+                                <t t-if="o.origin">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Order Number</h6>
+                                </t>
+                                <t t-if="o.user_id">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Sales Representative</h6>
+                                </t>
+                                <t t-if="o.user_id.phone">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Phone</h6>
+                                </t>
+                                <t t-if="o.user_id.login">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Email</h6>
+                                </t>
+                                 <t t-if="o.contact_person_id">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Contact Person</h6>
+                                </t>
+                                <!-- <t t-if="o.sh_inquiry_ref">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Inquiry Reference</h6>
+                                </t>
+                                 -->
+                                <t t-if="o.sh_po_no">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">PO Reference</h6>
+                                </t>
+                                <t t-elif="o.get_so()">
+                                    <h6 t-if="o.get_so().sh_po_no" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">PO Reference</h6>
+                                </t>
+                                <t t-if="o.sh_ref">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Customer Reference</h6>
+                                </t>
+                                <t t-elif="o.get_so()">
+                                    <h6 t-if="o.get_so().client_order_ref" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Customer Reference</h6>
+                                </t>
+                            </div>
+                            <div class="col-3" style="flex: 0 0 30%; max-width: 30%;">
+                                <t t-if="o.scheduled_date">
+                                    <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.scheduled_date" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/>
+                                </t>
+                                <t t-if="o.vessel_id">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; color: #800000; font-weight: bold;" t-esc="o.vessel_id.name"/>
+                                </t>
+                                <t t-if="o.origin">
+                                    <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.origin"/>
+                                </t>
+                                <t t-if="o.user_id">
+                                    <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.user_id.name"/>
+                                </t>
+                                <t t-if="o.user_id.phone">
+                                    <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.user_id.phone"/>
+                                </t>
+                                <t t-if="o.user_id.login">
+                                    <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.user_id.login"/>
+                                </t>
+                                <t t-if="o.contact_person_id">
+                                    <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.contact_person_id.name"/>
+                                </t>
+                                <!-- <t t-if="o.sh_inquiry_ref">
+                                    <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.sh_inquiry_ref" />
+                                </t> -->
+                                
+                                <t t-if="o.sh_po_no">
+                                    <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.sh_po_no"/>
+                                </t>
+                                
+                                <t t-elif="o.get_so()">
+                                    <p t-if="o.get_so().sh_po_no" style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.get_so().sh_po_no"/>
+                                </t>
+                                
+                                <t t-if="o.sh_ref">
+                                    <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.sh_ref"/>
+                                </t>
+                                
+                                <t t-elif="o.get_so()">
+                                    <p t-if="o.get_so().client_order_ref" style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.get_so().client_order_ref"/>
+                                </t>
+                            </div>
+                        </div>
+                        <!--<div class="row">-->
+                        <!--    <div class="col-3">-->
+                                
+                        <!--    </div>-->
+
+                        <!--    <div class="col-3"/>-->
+                        <!--    <div class="col-3" style="flex: 0 0 20%; max-width: 20%;">-->
+                        <!--        <t t-if="o.contact_person_id">-->
+                        <!--            <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Contact Person</h6>-->
+                        <!--        </t>-->
+                        <!--        <t t-if="o.sh_inquiry_ref">-->
+                        <!--            <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Inquiry Reference</h6>-->
+                        <!--        </t>-->
+                        <!--        <t t-if="o.sh_po_no">-->
+                        <!--            <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">PO Reference</h6>-->
+                        <!--        </t>-->
+                        <!--        <t t-elif="o.get_so()">-->
+                        <!--            <h6 t-if="o.get_so().sh_po_no" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">PO Reference</h6>-->
+                        <!--        </t>-->
+                        <!--        <t t-if="o.sh_ref">-->
+                        <!--            <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Customer Reference</h6>-->
+                        <!--        </t>-->
+                        <!--        <t t-elif="o.get_so()">-->
+                        <!--            <h6 t-if="o.get_so().client_order_ref" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Customer Reference</h6>-->
+                        <!--        </t>-->
+                        <!--    </div>-->
+                        <!--    <div class="col-3" style="flex: 0 0 30%; max-width: 30%;">-->
+                        <!--        <t t-if="o.contact_person_id">-->
+                        <!--            <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.contact_person_id.name"/>-->
+                        <!--        </t>-->
+                        <!--        <t t-if="o.sh_inquiry_ref">-->
+                        <!--            <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.sh_inquiry_ref" />-->
+                        <!--        </t>-->
+                                
+                        <!--        <t t-if="o.sh_po_no">-->
+                        <!--            <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.sh_po_no"/>-->
+                        <!--        </t>-->
+                                
+                        <!--        <t t-elif="o.get_so()">-->
+                        <!--            <p t-if="o.get_so().sh_po_no" style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.get_so().sh_po_no"/>-->
+                        <!--        </t>-->
+                                
+                        <!--        <t t-if="o.sh_ref">-->
+                        <!--            <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.sh_ref"/>-->
+                        <!--        </t>-->
+                                
+                        <!--        <t t-elif="o.get_so()">-->
+                        <!--            <p t-if="o.get_so().client_order_ref" style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="o.get_so().client_order_ref"/>-->
+                        <!--        </t>-->
+                        <!--    </div>-->
+                        <!--</div>-->
+                        <br/>
+                        <table class="table table-sm" name="stock_move_table">
+                            <thead>
+                                <tr>
+                                    <th name="th_no" class="text-start" style="font-family: 'Times New Roman'; font-size: 13.12px;">No.</th>
+                                    <th name="th_part_no" class="text-start" style="font-family: 'Times New Roman'; font-size: 13.12px;">Part No.</th>
+                                    <th name="th_description" class="text-start" style="font-family: 'Times New Roman'; font-size: 13.12px;">Description</th>
+                                    <th name="th_quantity" class="text-start" style="font-family: 'Times New Roman'; font-size: 13.12px;">Quantity</th>
+                                    <th name="th_unit" class="text-start" style="font-family: 'Times New Roman'; font-size: 13.12px;">Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="num" t-value="0"/>
+                                <t t-set="lines" t-value="o.move_ids.filtered(lambda x: x.product_uom_qty)"/>
+                                <tr t-foreach="lines" t-as="move">
+                                    <t t-set="num" t-value="num+1"/>
+                                    <td>
+                                        <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-esc="num"/>
+                                    </td>
+                                    <td>
+                                        <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="move.product_id.default_code"/>
+                                    </td>
+                                    <td>
+                                        <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="move.product_id.name"/>
+                                        <br/>
+                                        <t t-foreach="move.product_id.product_template_variant_value_ids" t-as="variant">
+                                            <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
+                                        </t>
+                                    </td>
+                                    <td class="text-right">
+                                        <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="move.product_uom_qty"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="move.product_uom"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <table class="table table-sm mt48" t-if="o.move_line_ids and o.state=='done'" name="stock_move_line_table">
+                            <t t-set="has_serial_number" t-value="False"/>
+                            <t t-set="has_serial_number" t-value="o.move_line_ids.mapped('lot_id')" groups="stock.group_lot_on_delivery_slip"/>
+                            <thead>
+                                <tr>
+                                     <th name="th_no" class="text-start" style="font-family: 'Times New Roman'; font-size: 13.12px;"><strong>No.</strong></th>
+                                    <th name="th_sml_part_no" class="text-start" style="font-family: 'Times New Roman'; font-size: 13.12px;"><strong>Part No.</strong></th>
+                                    <th name="th_sml_product" class="text-start" style="font-family: 'Times New Roman'; font-size: 13.12px;"><strong>Product</strong></th>
+                                    <t name="lot_serial" style="font-family: 'Times New Roman'; font-size: 13.12px;" t-if="has_serial_number">
+                                        <th class="text-start">
+                                            Lot/Serial Number
+                                        </th>
+                                    </t>
+                                    <th name="th_sml_quantity" style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-start"><strong>Quantity</strong></th>
+                                    <th name="th_sml_product_uom" style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-start"><strong>Unit</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody> -->
+                                
+                                <!-- This part gets complicated with different use cases (additional use cases in extensions of this report):
+                                1. If serial numbers are used and set to print on delivery slip => print lines as is, otherwise group them by overlapping
+                                    product + description + uom combinations
+                                2. If any packages are assigned => split products up by package (or non-package) and then apply use case 1 -->
+                                <!-- If has destination packages => create sections of corresponding products -->
+                                <!-- <t t-if="o.has_packages" name="has_packages">
+                                    <t t-set="packages" t-value="o.move_line_ids.mapped('result_package_id')"/>
+                                    <t t-foreach="packages" t-as="package">
+                                        <t t-call="stock.stock_report_delivery_package_section_line"/>
+                                        <t t-set="package_move_lines" t-value="o.move_line_ids.filtered(lambda l: l.result_package_id == package)"/> -->
+                                        <!-- If printing lots/serial numbers => keep products in original lines -->
+                                        <!-- <t t-if="has_serial_number">
+                                            <tr t-foreach="package_move_lines" t-as="move_line">
+                                                <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                            </tr>
+                                        </t> -->
+                                        <!-- If not printing lots/serial numbers => merge lines with same product+description+uom -->
+                                        <!-- <t t-if="not has_serial_number">
+                                            <t t-set="aggregated_lines" t-value="package_move_lines._get_aggregated_product_quantities()"/>
+                                            <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                                        </t> -->
+                                    <!-- </t> -->
+                                    <!-- Make sure we do another section for package-less products if they exist -->
+                                    <!-- <t t-set="move_lines" t-value="o.move_line_ids.filtered(lambda l: not l.result_package_id)"/>
+                                    <t t-if="move_lines" name="no_package_move_lines">
+                                        <t t-call="stock.stock_report_delivery_no_package_section_line" name="no_package_section"/>
+                                        <t t-if="has_serial_number">
+                                            <tr t-foreach="move_lines" t-as="move_line">
+                                                <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                            </tr>
+                                        </t>
+                                        <t t-if="not has_serial_number">
+                                            <t t-set="aggregated_lines" t-value="move_lines._get_aggregated_product_quantities()"/>
+                                            <t t-if="aggregated_lines">
+                                                <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                                            </t>
+                                        </t>
+                                    </t>
+                                </t> -->
+                                <!-- No destination packages -->
+                                <!-- <t t-else=""> -->
+                                    <!-- If printing lots/serial numbers => keep products in original lines -->
+                                    <!-- <t t-if="has_serial_number">
+                                        <tr t-foreach="o.move_line_ids" t-as="move_line">
+                                            <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                        </tr>
+                                    </t> -->
+                                    <!-- If not printing lots/serial numbers => merge lines with same product -->
+                                    <!-- <t t-if="not has_serial_number" name="aggregated_move_lines">
+                                        <t t-set="aggregated_lines" t-value="o.move_line_ids._get_aggregated_product_quantities()"/>
+                                        <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                                    </t>
+                                </t>
+                            </tbody>
+                        </table> -->
+                        <t t-set="backorders" t-value="o.backorder_ids.filtered(lambda x: x.state not in ('done', 'cancel'))"/>
+                        <t t-if="o.backorder_ids and backorders">
+                            <p>
+                                <span style="font-family: 'Times New Roman'; font-size: 13.12px;">All items couldn't be shipped, the following items will be shipped as soon as they become available.</span>
+                            </p>
+                            <table class="table table-sm" name="stock_backorder_table">
+                                <thead>
+                                    <tr>
+                                        <th style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-start" name="th_sb_product"><strong>Product</strong></th>
+                                        <th style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-start" name="th_sb_quantity"><strong>Quantity</strong></th>
+                                        <th style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-start" name="th_sml_product_uom"><strong>Unit</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="backorders.mapped('move_ids').filtered(lambda x: x.product_uom_qty)" t-as="bo_line">
+                                        <td>
+                                            <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="bo_line.product_id.name"/>
+                                            <br/>
+                                            <t t-foreach="bo_line.product_id.product_template_variant_value_ids" t-as="variant">
+                                                <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
+                                            </t>
+                                            <p t-if="bo_line.description_picking != bo_line.product_id.name">
+                                                <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="bo_line.description_picking"/>
+                                            </p>
+                                        </td>
+                                        <td class="text-center">
+                                            <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="bo_line.product_uom_qty"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="bo_line.product_uom"/>
+                                        </td>
+                                    </tr>
+                                    <!-- <t t-foreach="backorders" t-as="backorder">
+                                        <t t-set="bo_lines" t-value="backorder.move_lines.filtered(lambda x: x.product_uom_qty)"/>
+                                        <tr t-foreach="bo_lines" t-as="bo_line">
+                                            <td>
+                                                    <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="bo_line.product_id.name"/>
+                                                <br/>
+                                                <t t-foreach="bo_line.product_id.product_template_variant_value_ids" t-as="variant">
+                                                    <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
+                                                </t>
+                                                <p t-if="bo_line.description_picking != bo_line.product_id.name">
+                                                    <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="bo_line.description_picking"/>
+                                                </p>
+                                            </td>
+                                            <td class="text-center">
+                                                <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="bo_line.product_uom_qty"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span style="font-family: 'Times New Roman'; font-size: 13.12px;" t-field="bo_line.product_uom"/>
+                                            </td>
+                                        </tr>
+                                    </t> -->
+                                </tbody>
+                            </table>
+                        </t>
+
+                        <div t-if="o.signature" class="mt32 ml64 mr4" name="signature">
+                            <div class="offset-8">
+                                <strong>Signature</strong>
+                            </div>
+                            <div class="offset-8">
+                                <img t-att-src="image_data_uri(o.signature)" style="max-height: 4cm; max-width: 8cm;"/>
+                            </div>
+                            <div class="offset-8 text-center">
+                                <p t-field="o.partner_id.name"/>
+                            </div>
+                        </div>
+
+                        <div class="row bottom_area" style="padding: 10px 0px 0px;">
+                            <div class="col-4" style="margin-left: 6px;">
+                                <p style="margin-bottom: 75px; font-family: 'Times New Roman'; font-size: 13.12px;">Received in good order &amp; conditions</p>
+                                <h6 style="font-weight: bold; margin-top: 20px; font-family: 'Times New Roman'; font-size: 13.12px;">Signature &amp; Company Stamp</h6>
+                            </div>
+                            <div class="col-4"/>
+                            <div class="col-4">
+                                <p style="margin-bottom: 75px; font-family: 'Times New Roman'; font-size: 13.12px;">Delivered by ,</p>
+                                <h6 t-esc="o.company_id.name" style="font-weight: bold; margin-top: 20px; font-family: 'Times New Roman'; font-size: 13.12px;"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="footer justify-content-center" style="color: 212121;">
+                        <div class="row">
+                            <div class="col-3"/>
+                            <div class="col-4" style="font-family: 'Times New Roman'; font-weight: bold;">
+                                <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.name"/>
+                                <t t-if="o.company_id.street">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.street"/>
+                                </t>
+                                <t t-if="o.company_id.street2"><span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.street2"/></t>
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="o.company_id.city">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.city"/>
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">,</span>
+                                    </t>
+                                </p>
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="o.company_id.state_id"> <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.state_id.name"/>, </t>
+                                    <t t-if="o.company_id.country_id"> <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.country_id.name"/>- </t>
+                                    <t t-if="o.company_id.zip">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.zip"/>
+                                    </t>
+                                </p>
+                            </div>
+                            <div class="col-3" style="font-family: 'Times New Roman'; font-weight: bold;">
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="o.company_id.phone">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Tel : </span>
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.phone"/>
+                                    </t>
+                                </p>
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="o.company_id.fax">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Fax : </span>
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.fax"/>
+                                    </t>
+                                </p>
+                                <t t-if="o.company_id.website">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.website"/>
+                                </t>
+                            </div>
+
+                            <div class="col-2"/>
+                        </div>
+                        <br/>
+
+                        <div t-if="report_type == 'pdf'" class="text-center" style="margin-top: 5px; color: 212121; font-weight: bold;">
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px;">Page</span>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="page"/>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">/</span>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="topage"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+
+        </xpath>
+    </template>
+</odoo>

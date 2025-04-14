@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="thomas_report_paperformat" model="report.paperformat">
+            <field name="name">Thomas Report</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+        </record>
+    </data>
+    
+    
+    <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//t[1]" position="replace">
+            <t t-call="web.basic_layout">
+                <style type="text/css">
+                    @font-face {
+                    font-family: 'Times New Roman';
+                    src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype');
+                    }
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6,
+                    p,
+                    span,
+                    div,
+                    strong,
+                    th,
+                    tr,
+                    td,
+                    b {
+                        font-family: "Times New Roman" !important;
+                    }
+                </style>
+                <div class="header">
+                    <!-- <div class="row">
+                        <div class="col-9">
+                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="max-height: 200px;" alt="Logo"/>
+                        </div>
+                        <div class="col-3 text-right">
+                            <br/>
+                            <span style="font-size:28px;font-weight:bold;">SALES</span> <br/>
+                            <span style="font-size:28px;font-weight:bold">QUOTATION</span>
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                        <div class="col-3">
+                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" style="height: 176px; width: 258px; justify-content: center; text-align: center;" alt="Logo"/>
+                        </div>
+                        <div class="col-3"/>
+                        <div class="col-6">
+                            <h2 style="margin-top: -15px; padding-bottom: 22px; font-family: 'Times New Roman';">
+                                <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                                    <p style="font-size: 31.25px; font-family: 'Times New Roman';" t-if="doc.state not in ['draft','sent']">Sales Order</p>
+                                    <p style="font-size: 31.25px; font-family: 'Times New Roman';" t-if="doc.state in ['draft','sent']">Sales Quotation</p>
+                                </t>
+                                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                                    <p style="font-size: 31.25px; font-family: 'Times New Roman';">Pro-Forma Invoice</p>
+                                </t>
+                            </h2>
+                            <!--<div style="padding: 12px 0px;"/>-->
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <p style="font-size: 31.25px; font-family: 'Times New Roman';color: #800000;margin-left: 15px"><t t-esc="doc.name"/></p>
+                                </div>
+                                <!--<div class="col-4">-->
+                                <!--    <div style="font-family: 'Times New Roman';">-->
+                                <!--    	<t t-if="doc.vessel_id">-->
+                                <!--    		<h6 style="font-size: 13.12px; font-family: 'Times New Roman'; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">Project Name</h6>-->
+                                <!--    	</t>-->
+                                <!--    </div>-->
+                                <!--</div>-->
+                                <!--<div class="col-8">-->
+                                <!--    <div style="color:#800000;padding-left:30px;font-weight:bold">-->
+                                <!--    	<t t-if="doc.vessel_id">-->
+                                <!--    		<p style="font-size: 13.12px; font-family: 'Times New Roman'; line-height: 13.12px; padding: 0px; margin-bottom: 5px;color: #800000; " t-esc="doc.vessel_id.name"/>-->
+                                <!--    	</t>-->
+                                        
+                                <!--    </div>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="page">
+
+                    <div class="row mt32 mb32">
+                            <div class="col-4">
+                                <h6 style="font-family: 'Times New Roman'; font-size: 13.12px; font-weight: bold; margin-bottom: 5px; line-height: 13.12px;">Billing Address</h6>
+                                <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_invoice_id.name"/>
+                                <t t-if="doc.partner_invoice_id.street">
+                                	<span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_invoice_id.street"/>
+                                </t>
+                                <t t-if="doc.partner_invoice_id.street2">
+                                    <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_invoice_id.street2"/>
+                                </t>
+                                <p style="margin-bottom: 5px; line-height: 13.12px;">
+                                	<t t-if="doc.partner_invoice_id.city">
+                                		<span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px;" t-esc="doc.partner_invoice_id.city"/>,
+                                	</t>
+                                	<t t-if="doc.partner_invoice_id.state_id">
+                                		<span style="font-family: 'Times New Roman'; font-size: 13.12px; margin-bottom: 5px;" t-esc="doc.partner_invoice_id.state_id.name"/>,
+                                	</t>
+                                	<t t-if="doc.partner_invoice_id.zip">
+                                		<span style="font-family: 'Times New Roman'; font-size: 13.12px; margin-bottom: 5px;" t-esc="doc.partner_invoice_id.zip"/>
+                                	</t>
+                                </p>
+                                <t t-if="doc.partner_invoice_id.country_id">
+                              		<span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_invoice_id.country_id.name"/>  
+                                </t>
+                                <t t-if="doc.partner_invoice_id.phone">
+                                	<span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_invoice_id.phone"/>
+                                </t>
+                            </div>
+                            <div class="col-2"/>
+                            <div class="col-3" style="flex: 0 0 20%; max-width: 20%;">
+                                <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Date</h6>
+                                <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Quotation Number</h6>
+                                <t t-if="doc.state == 'draft'">
+                                    <h6 style="font-family: 'Times New Roman'; font-size: 13.12px; margin-left: 15px; padding: 0px; line-height: 13.12px; font-weight: bold; margin-bottom: 5px;">Quotation Validity</h6>
+                                </t>
+
+                                <t t-if="doc.state != 'draft'">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Order Number</h6>
+                                </t>
+                                <t t-if="doc.vessel_id">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Project</h6>
+                                </t>
+                                <t t-if="doc.user_id">
+                                	<h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Sales Representative</h6>	
+                                </t>
+                                <t t-if="doc.user_id.partner_id.phone">
+                                	<h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Phone</h6>	
+                                </t>
+                                <t t-if="doc.user_id.login">
+                                	<h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Email</h6>	
+                                </t>
+                            </div>
+                            <div class="col-3" style="flex: 0 0 30%; max-width: 30%;">
+                                <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="doc.date_order" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/>
+                                <t t-if="doc.state == 'draft'">
+                                    <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; color: #800000; font-weight: bold;" t-esc="doc.name"/>
+                                </t>
+                                <t t-else=""><h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="doc.quotation_no"/></t>
+                                
+                                <t t-if="doc.state == 'draft'">
+                                    <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="doc.validity_date" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/>
+                                </t>
+                                <t t-if="doc.state != 'draft'">
+                                    <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; color: #800000; font-weight: bold;" t-esc="doc.name"/>
+                                </t>
+                                <t t-if="doc.vessel_id">
+                                	<p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="doc.vessel_id.name"/>
+                                </t>
+                                
+                                <t t-if="doc.user_id">
+                                	<p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="doc.user_id.name"/>
+                                </t>
+                                <t t-if="doc.user_id.phone">
+                                	<p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="doc.user_id.phone"/>	
+                                </t>
+                                <t t-if="doc.user_id.login">
+                                	<p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="doc.user_id.login"/>
+                                </t>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 20px;margin-top: -5px;">
+                            <div class="col-3">
+                                <h6 style="font-family: 'Times New Roman'; font-size: 13.12px; font-weight: bold; margin-bottom: 5px; line-height: 13.12px;">Shipping Address</h6>
+                                <span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_shipping_id.name"/>
+                                <t t-if="doc.partner_shipping_id.street">
+                                	<span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_shipping_id.street"/>
+                                </t>
+                                <t t-if="doc.partner_shipping_id.street2"><span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_invoice_id.street2"/></t>
+                                <p style="margin-bottom: 5px; line-height: 13.12px;">
+                                	<t t-if="doc.partner_shipping_id.city">
+                                		<span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px;" t-esc="doc.partner_shipping_id.city"/>,
+                                	</t>
+                                	<t t-if="doc.partner_shipping_id.state_id">
+                                		<span style="font-family: 'Times New Roman'; font-size: 13.12px; margin-bottom: 5px;" t-esc="doc.partner_shipping_id.state_id.name"/>,
+                                	</t>
+                                	<t t-if="doc.partner_shipping_id.zip">
+                                		<span style="font-family: 'Times New Roman'; font-size: 13.12px; margin-bottom: 5px;" t-esc="doc.partner_shipping_id.zip"/>
+                                	</t>
+                                </p>
+                                <t t-if="doc.partner_shipping_id.country_id">
+                                	<span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_shipping_id.country_id.name"/>
+                                </t>
+                                <t t-if="doc.partner_shipping_id.phone">
+                                	<span style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="doc.partner_shipping_id.phone"/>
+                                </t>
+                            </div>
+                            <div class="col-3"/>
+                            <div class="col-3" style="flex: 0 0 20%; max-width: 20%;">
+                            	<t t-if="doc.contact_person_id">
+                                	<h6 style="font-family: 'Times New Roman'; font-size: 13.12px; margin-left: 15px; padding: 0px; line-height: 13.12px; font-weight: bold; margin-bottom: 5px;">Contact Person</h6>
+                                </t>
+                                <t t-if="doc.client_order_ref">
+                                	<h6 style="font-family: 'Times New Ro378pxman'; font-size: 13.12px; margin-left: 15px; padding: 0px; line-height: 13.12px; font-weight: bold; margin-bottom: 5px;">Customer Reference</h6>
+                                </t>
+                                <t t-if="doc.sh_po_no">
+                                	<t t-if="env.context.get('proforma', False) or is_pro_forma or doc.state in ['sale','done']">
+	                                    <h6 style="font-family: 'Times New Roman'; margin-left: 15px; padding: 0px; font-size: 13.12px; line-height: 13.12px; font-weight: bold; margin-bottom: 5px;">PO Reference</h6>
+	                                </t>
+                                </t>
+                                <t t-if="doc.incoterm">
+                                	<h6 style="font-family: 'Times New Roman'; font-size: 13.12px; margin-left: 15px; padding: 0px; line-height: 13.12px; font-weight: bold; margin-bottom: 5px;">Delivery Term</h6>
+                                </t>
+                                <t t-if="doc.payment_term_id">
+                                	<h6 style="font-family: 'Times New Roman'; font-size: 13.12px; margin-left: 15px; padding: 0px; line-height: 13.12px; font-weight: bold; margin-bottom: 5px;">Payment Term</h6>
+                                </t>
+                            </div>
+                            <div class="col-3" style="flex: 0 0 30%; max-width: 30%;">
+                            	<t t-if="doc.contact_person_id">
+                                	<p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="doc.contact_person_id.name"/>
+                                </t>
+                                <t t-if="doc.client_order_ref">
+                                	<p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="doc.client_order_ref"/>
+                                </t>
+                                <t t-if="doc.sh_po_no">
+	                                <t t-if="env.context.get('proforma', False) or is_pro_forma or doc.state in ['sale','done']">
+	                                    <p style="font-family: 'Times New Roman'; padding: 0px; font-size: 13.12px; line-height: 13.12px; margin-bottom: 5px;" t-esc="doc.sh_po_no"/>
+	                                </t>
+	                           	</t>
+                                <t t-if="doc.incoterm">
+                                	<!--<p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;"><span t-esc="doc.incoterm.name"/> - <span t-esc="doc.incoterm_location"/></p>-->
+                                    <p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="doc.incoterm.name or '' + ' - ' + doc.incoterm_location or ''"/>
+                                </t>
+                                <t t-if="doc.payment_term_id">
+                                	<p style="font-family: 'Times New Roman'; font-size: 13.12px; padding: 0px; line-height: 13.12px; margin-bottom: 5px;" t-esc="doc.payment_term_id.name"/>
+                                </t>
+                            </div>
+                        </div>
+
+
+                    <t t-set="lines_to_report" t-value="doc._get_order_lines_to_report()"/>
+                    <t t-set="display_discount" t-value="any(l.discount for l in lines_to_report)"/>
+
+                    <div class="oe_structure"/>
+                    <table class="table table-sm o_main_table" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                        <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                        <thead>
+                            <tr>
+                                <th name="no" style="font-family: 'Times New Roman'; font-size: 13.12px;">No</th>
+                                <th name="part_no" style="font-family: 'Times New Roman'; font-size: 13.12px;">Part No</th>
+                                <th name="th_description" style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-start">Description</th>
+                                <th name="th_quantity" style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-end">Quantity</th>
+                                <th name="th_unit" style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-end">Unit</th>
+                                <th name="th_priceunit" style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-end">Price/Unit </th>
+                                <th name="th_discount" style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-end" t-if="display_discount">
+                                    <span>Disc</span>
+                                </th>
+                                <th name="th_subtotal" style="font-family: 'Times New Roman'; font-size: 13.12px;" class="text-end">
+                                    <span>Total</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+
+                            <t t-set="current_subtotal" t-value="0"/>
+                            <t t-set="num" t-value="0"/>
+
+                            <t t-foreach="lines_to_report" t-as="line">
+
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
+
+                                <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
+                                    <t t-if="not line.display_type">
+                                        <t t-set="num" t-value="num+1"/>
+                                        <td name="td_no" style="font-family: 'Times New Roman'; font-size: 13.12px;"><span t-esc="num"/></td>
+                                        <td name="td_internaal_ref" style="font-family: 'Times New Roman'; font-size: 13.12px;"><span t-field="line.product_id.default_code"/></td>
+                                        <td name="td_name" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                                            <span t-field="line.product_id.name"/>
+                                            <br/>
+                                            <t t-foreach="line.product_id.product_template_variant_value_ids" t-as="variant">
+                                                <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
+                                            </t>
+                                        </td>
+                                        <td name="td_quantity" class="text-end" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                                            <span t-field="line.product_uom_qty"/>
+                                        </td>
+                                        <td name="td_unit" class="text-end" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                                            <span t-field="line.product_uom"/>
+                                            <span t-if="line.product_packaging_id">
+                                                (<span t-field="line.product_packaging_qty" t-options="{&quot;widget&quot;: &quot;integer&quot;}"/> <span t-field="line.product_packaging_id"/>)
+                                            </span>
+                                        </td>
+                                        <td name="td_priceunit" class="text-end" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                                            <span t-field="line.price_unit"/>
+                                        </td>
+                                        <td class="text-end" style="font-family: 'Times New Roman'; font-size: 13.12px;" t-if="display_discount">
+                                            <span t-field="line.discount">-</span>
+                                        </td>
+                                        <td t-if="not line.is_downpayment" name="td_subtotal" class="text-end o_price_total" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                                            <span t-field="line.price_subtotal">27.00</span>
+                                        </td>
+                                    </t>
+                                    <t t-elif="line.display_type == 'line_section'" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                                        <td name="td_section_line" colspan="99">
+                                            <span t-field="line.name">A section title</span>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+                                    <t t-elif="line.display_type == 'line_note'">
+                                        <td name="td_note_line" colspan="99" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                                            <span t-field="line.name">A note, whose content usually applies to the section or product above.</span>
+                                        </td>
+                                    </t>
+                                </tr>
+
+                                <t t-if="current_section and (line_last or doc.order_line[line_index+1].display_type == 'line_section') and not line.is_downpayment">
+                                    <tr class="is-subtotal text-end">
+                                        <td name="td_section_subtotal" colspan="99" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                                            <strong class="mr16">Subtotal</strong>
+                                            <span t-out="current_subtotal" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="clearfix" name="so_total_summary" style="font-family: 'Times New Roman'; font-size: 13.12px;">
+                        <div id="total" class="row" name="total">
+                            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
+                                <table class="table table-sm table-borderless">
+                                    <!-- Tax totals -->
+                                    <t t-call="sale.document_tax_totals">
+                                        <t t-set="tax_totals" t-value="doc.tax_totals"/>
+                                        <t t-set="currency" t-value="doc.currency_id"/>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oe_structure"/>
+                    <div class="row" t-if="(env.context.get('proforma', False) or is_pro_forma)">
+                        <div class="col-4">
+                                    <p style="font-family: 'Times New Roman'; margin-bottom: 75px; font-size: 13.12px;" name="bank">
+                                        <span t-esc="doc.company_id.partner_id.bank_ids[0].acc_number"/> - <span t-esc="doc.company_id.partner_id.bank_ids[0].bank_id.name"/> (<span t-esc="doc.company_id.name"/>)
+                                     </p>
+                        </div>
+                    </div>
+
+                    <div class="row bottom_area" style="padding: 10px 0px;">
+                        <div class="col-4" style="margin-left: 6px;">
+                            <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                                <p style="font-family: 'Times New Roman'; margin-bottom: 75px; font-size: 13.12px;">Authorized by ,</p>
+                                <h6 t-esc="doc.company_id.name" style="font-weight: bold; margin-top: 20px; font-family: 'Times New Roman'; font-size: 13.12px;"/>
+                            </t>
+                            <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                                <p style="margin-bottom: 75px; font-family: 'Times New Roman'; font-size: 13.12px;">Yours faithfully,</p>
+                                <h6 t-esc="doc.company_id.name" style="font-weight: bold; margin-top: 20px; font-family: 'Times New Roman'; font-size: 13.12px;"/>
+                            </t>
+                        </div>
+                        <div class="col-8"/>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+                
+
+                
+
+
+                <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                    <div class="footer justify-content-center" style="color: 212121;">
+                        <div class="row">
+                            <div class="col-3" style="font-family: 'Times New Roman'; font-weight: bold;">
+                                <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.name"/>
+                                <t t-if="doc.company_id.street">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.street"/>
+                                </t>
+                                <t t-if="doc.company_id.street2"><span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.street2"/></t>
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="doc.company_id.city">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.city"/>
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">,</span>
+                                    </t>
+                                </p>
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="doc.company_id.state_id">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.state_id.name"/>,                                    	
+                                    </t>
+                                    <t t-if="doc.company_id.country_id">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.country_id.name"/>-
+                                    </t>
+                                    <t t-if="doc.company_id.zip">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.zip"/>                                    	
+                                    </t>
+                                </p>
+                            </div>
+                            <div class="col-3" style="font-family: 'Times New Roman'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
+                                <t t-if="doc.company_id.phone">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Tel :</span>
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.phone"/><br/>
+                                </t>
+                                <t t-if="doc.company_id.fax">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Fax :</span>
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.fax"/><br/>
+                                </t>
+                                <t t-if="doc.company_id.website">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.website"/>                                    	
+                                </t>
+                            </div>
+                            <div class="col-3" style="font-family: 'Times New Roman'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
+                                <t t-if="doc.company_id.vat">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Vat Reg.No : </span>
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.vat"/><br/>
+                                </t>
+                                <t t-if="doc.company_id.business_id">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Business ID .no: </span>
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.business_id"/><br/>
+                                </t>
+                                <t t-if="doc.company_id.registered_office">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Registered Office: </span>
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.registered_office"/>
+                                </t>
+                            </div>
+                            <div class="col-3" style="font-family: 'Times New Roman'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
+                                <t t-if="doc.company_id.bank_acc_no">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Bank account no. : </span>
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.bank_acc_no"/><br/>
+                                </t>
+                                <t t-if="doc.company_id.iban">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">IBAN: </span>
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.iban"/><br/>
+                                </t>
+                                <t t-if="doc.company_id.swift">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">SWIFT: </span>
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.swift"/>
+                                </t>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div t-if="report_type == 'pdf'" class="text-center" style="margin-top: 5px; color: 212121; font-weight: bold;">
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px;">Page</span>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="page"/>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">/</span>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="topage"/>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="footer justify-content-center" style="color: 212121;">
+                        <div class="row">
+                            <div class="col-3"/>
+                            <div class="col-4" style="font-family: 'Times New Roman'; font-weight: bold;">
+                                <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.name"/>
+                                <t t-if="doc.company_id.street">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.street"/>
+                                </t>
+                                <t t-if="doc.company_id.street2"><span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.street2"/></t>
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="doc.company_id.city">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.city"/>
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">,</span>
+                                    </t>
+                                </p>
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.state_id.name"/>,
+                                    <t t-if="doc.company_id.country_id">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.country_id.name"/>-
+                                    </t>
+                                    <t t-if="doc.company_id.zip">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.zip"/>
+                                    </t>
+                                </p>
+                            </div>
+                            <div class="col-3" style="font-family: 'Times New Roman'; font-weight: bold;">
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="doc.company_id.phone">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Tel : </span>
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.phone"/>                                    		
+                                    </t>
+                                </p>
+                                <p style="line-height: 10px; margin-bottom: 0px;">
+                                    <t t-if="doc.company_id.fax">
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Fax : </span>
+                                        <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.fax"/>
+                                    </t>
+                                </p>
+                                <t t-if="doc.company_id.website">
+                                    <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.website"/>
+                                </t>
+                            </div>
+                            <div class="col-2"/>
+                        </div>
+                        <br/>
+
+                        <div t-if="report_type == 'pdf'" class="text-center" style="margin-top: 5px; color: 212121; font-weight: bold;">
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px;">Page</span>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="page"/>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">/</span>
+                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="topage"/>
+                        </div>
+                    </div>
+                </t>
+
+
+
+
+            </t>
+        </xpath>
+    </template>
+
+</odoo>
