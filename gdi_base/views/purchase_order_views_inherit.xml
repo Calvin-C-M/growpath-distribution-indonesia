@@ -5,6 +5,13 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_create_invoice'][not(contains(@class,'oe_highlight'))]" position="replace">
+                <button name="action_create_invoice" string="Create Bill" type="object" context="{'create_bill':True}" groups="purchase.group_purchase_manager" invisible="state not in ('purchase', 'done') or invoice_status not in ('no', 'invoiced') or not order_line" data-hotkey="w"/>
+            </xpath>
+            <xpath expr="//button[@name='action_create_invoice'][@class='oe_highlight']" position="replace">
+                <button name="action_create_invoice" string="Create Bill" type="object" class="oe_highlight" context="{'create_bill':True}" groups="purchase.group_purchase_manager" invisible="state not in ('purchase', 'done') or invoice_status in ('no', 'invoiced')" data-hotkey="w"/>
+            </xpath>
+
             <xpath expr="//field[@name='date_approve']" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
