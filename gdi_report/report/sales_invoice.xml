@@ -146,9 +146,9 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                                     <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Date</h6>
                                 </t>	
                                 <t t-if="o.move_type != 'out_refund'">
-                                    <t t-if="o.vessel_id">
+                                    <!-- <t t-if="o.vessel_id">
                                         <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Project Name</h6>
-                                    </t>	
+                                    </t>	 -->
                                      <t t-if="o.get_so()">
                                         <h6 t-if="o.get_so().name" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Order Number</h6>
                                     </t>
@@ -170,9 +170,9 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                                 </t>
 
                                 <t t-if="o.move_type == 'out_refund'">
-                                    <t t-if="o.vessel_id">
+                                    <!-- <t t-if="o.vessel_id">
                                         <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Project Name</h6>
-                                    </t>	
+                                    </t>	 -->
                                     <t t-if="o.get_so()">
                                         <h6 t-if="o.get_so().name" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Source ( Refer to SO )</h6>
                                     </t>
@@ -192,12 +192,12 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                                     <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.invoice_date" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/>
                                 </t>
                                 <t t-if="o.move_type != 'out_refund'">
-                                    <t t-if="o.vessel_id">
+                                    <!-- <t t-if="o.vessel_id">
                                         <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.vessel_id.name"/>
                                     </t>
                                     <t t-elif="o.get_so()">
                                         <p t-if="o.get_so().vessel_id" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.get_so().vessel_id.name"/>
-                                    </t>
+                                    </t> -->
                                     <t t-if="o.get_so()">
                                         <p t-if="o.get_so().name" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.get_so().name"/>
                                     </t>
