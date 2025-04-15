@@ -7,7 +7,7 @@ class AccountMoveLine(models.Model):
 
     @api.constrains('quantity', 'purchase_line_id')
     def _validate_quantity(self):
-        if self.purchase_line_id and self.quantity > self.purchase_line_id.product_qty:
+        if self.purchase_line_id and not self.purchase_line_id.is_downpayment and self.quantity > self.purchase_line_id.product_qty:
             raise ValidationError('Quantity cannot be greater than demand quantity')
         
     @api.constrains('move_id')
