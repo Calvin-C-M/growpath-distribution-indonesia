@@ -106,7 +106,7 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                         </div>
                         <div class="col-3"/>
                         <div class="col-3">
-                            <h6 style="font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">Shipping address</h6>
+                            <h6 style="font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">Ship To:</h6>
                             <span style="font-family: 'Calibri'; margin-left: 15px; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.company_id.partner_id.name"/>
                             <t t-if="o.company_id.partner_id.street">
                           		<span style="font-family: 'Calibri'; margin-left: 15px; line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.company_id.partner_id.street"/>  
@@ -189,7 +189,7 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                             <tr>
                                 <th name="no" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start">No</th>
                                 <!-- <th name="part_no" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start">Part No.</th> -->
-                                <!-- <th name="th_description" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start"><strong>Description</strong></th> -->
+                                <th name="th_description" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start"><strong>Description</strong></th>
                                 <!-- <th name="th_taxes" style="font-family: 'Calibri'; font-size: 13.12px;"><strong>Taxes</strong></th> -->
                                 <!-- <th name="th_date_req" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-center"><strong>Date Req.</strong></th> -->
                                 <th name="th_quantity" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-end"><strong>Qty</strong></th>
