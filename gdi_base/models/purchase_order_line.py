@@ -10,6 +10,9 @@ class PurchaseOrderLine(models.Model):
     product_category_id = fields.Many2one(
         'product.category', string='Product, Category', store=True, readonly=False,
     )
+    account_id = fields.Many2one(
+        'account.account', string='Chart of Account', related='product_category_id.property_account_expense_categ_id'
+    )
     # product_id = fields.Many2one(domain=_get_product_domain)
     product_id = fields.Many2one(domain=lambda self: [('purchase_ok', '=', True), ('categ_id', '=', self.product_category_id.id)])
 
