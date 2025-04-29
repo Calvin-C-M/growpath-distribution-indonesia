@@ -140,7 +140,8 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                         <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf">
                             https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf
                         </a>
-                        <br/>
+                        <br />
+                        <br />
                         <span>JTI Billing Procedure / Prosedur Penagihan</span>
                         <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_Invoice_Submission_Process.pdf">
                             https://files.jti.com/pages/TC/TC_JTI_Indonesia_Invoice_Submission_Process.pdf
