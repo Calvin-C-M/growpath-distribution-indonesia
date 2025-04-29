@@ -8,7 +8,7 @@ class PurchaseOrderLine(models.Model):
         return [('purchase_ok', '=', True), ('categ_id', '=', self.product_category_id.id)]
 
     product_category_id = fields.Many2one(
-        'product.category', string='Product, Category', store=True, readonly=False,
+        'product.category', string='Product, Category', related='product_id.product_tmpl_id.categ_id'
     )
     account_id = fields.Many2one(
         'account.account', string='Chart of Account', related='product_category_id.property_account_expense_categ_id'
