@@ -136,14 +136,12 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                    </div> 
 
                    <div class="row">
+                        <span>JTI General Term / Ketentuan Umum JTI</span>
                         <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf">
                             https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf
                         </a>
                         <br/>
-                        <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_IMS_Policy_SAP_%20PO.pdf">
-                            https://files.jti.com/pages/TC/TC_JTI_Indonesia_IMS_Policy_SAP_%20PO.pdf
-                        </a>
-                        <br/>
+                        <span>JTI Billing Procedure / Prosedur Penagihan</span>
                         <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_Invoice_Submission_Process.pdf">
                             https://files.jti.com/pages/TC/TC_JTI_Indonesia_Invoice_Submission_Process.pdf
                         </a>
@@ -190,8 +188,8 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                         <thead style="display: table-row-group">
                             <tr>
                                 <th name="no" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start">No</th>
-                                <th name="part_no" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start">Part No.</th>
-                                <th name="th_description" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start"><strong>Description</strong></th>
+                                <!-- <th name="part_no" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start">Part No.</th> -->
+                                <!-- <th name="th_description" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-start"><strong>Description</strong></th> -->
                                 <!-- <th name="th_taxes" style="font-family: 'Calibri'; font-size: 13.12px;"><strong>Taxes</strong></th> -->
                                 <!-- <th name="th_date_req" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-center"><strong>Date Req.</strong></th> -->
                                 <th name="th_quantity" style="font-family: 'Calibri'; font-size: 13.12px;" class="text-end"><strong>Qty</strong></th>
@@ -214,9 +212,8 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                                         <td name="td_no" style="font-family: 'Calibri'; font-size: 13.12px;"><span t-esc="num"/></td>
                                         <!-- <td name="td_internaal_ref" style="font-family: 'Calibri'; font-size: 13.12px;"><span t-field="line.product_id.default_code"/></td> -->
                                         <td id="product" style="font-family: 'Calibri'; font-size: 13.12px;">
-                                            <span t-field="line.product_id.name"/>
+                                            <span t-field="line.display_name"/>
                                             <br/>
-                                            <span t-field="line.product_description_variants" />
                                             <t t-foreach="line.product_id.product_template_variant_value_ids" t-as="variant">
                                                 <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
                                             </t>
