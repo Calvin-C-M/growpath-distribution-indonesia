@@ -8,6 +8,18 @@
             <xpath expr="//field[@name='item_ids']/list" position="inside">
                 <field name="analytic_distribution" widget="analytic_distribution" />
             </xpath>
+            <xpath expr="//field[@name='item_ids']/list/field[@name='account_id']" position="before">
+                <field name="code" />
+            </xpath>
+            <xpath expr="//field[@name='item_ids']/list/field[@name='account_id']" position="attributes">
+                <attribute name="width"></attribute>
+            </xpath>
+            <xpath expr="//field[@name='item_ids']/list/field[@name='date']" position="attributes">
+                <attribute name="width"></attribute>
+            </xpath>
+            <xpath expr="//field[@name='item_ids']/list/field[@name='amount']" position="attributes">
+                <attribute name="width"></attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
