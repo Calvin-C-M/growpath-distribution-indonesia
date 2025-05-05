@@ -7,9 +7,10 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='item_ids']/list" position="inside">
                 <field name="analytic_distribution" widget="analytic_distribution" />
+                <field name="accumulated_amount" />
             </xpath>
             <xpath expr="//field[@name='item_ids']/list/field[@name='account_id']" position="before">
-                <field name="code" />
+                <field name="name" />
             </xpath>
             <xpath expr="//field[@name='item_ids']/list/field[@name='account_id']" position="attributes">
                 <attribute name="width"></attribute>

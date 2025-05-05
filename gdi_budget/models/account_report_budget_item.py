@@ -6,7 +6,8 @@ class AccountReportBudgetItem(models.Model):
     _name = 'account.report.budget.item'
     _inherit = ['account.report.budget.item', 'analytic.mixin']
 
-    code = fields.Char(string='Budget Code', compute="_compute_code", help='Budget code identifier')
+    name = fields.Char(string='Budget Code', compute="_compute_code", help='Budget code identifier')
+    accumulated_amount = fields.Float(string='Accumulated Amount', compute="_compute_accumulated_amount", store=True, help='Accumulated amount for the budget item')
 
     @api.depends('date')
     def _compute_code(self):
@@ -17,6 +18,14 @@ class AccountReportBudgetItem(models.Model):
             analytic_account = rec.distribution_analytic_account_ids[0] if rec.distribution_analytic_account_ids else None
             
             if analytic_account:
-                rec.code = f"{prefix}_{analytic_account.name}_{month}_{account_code}"
+                rec.name = f"{prefix}_{analytic_account.name}_{month}_{account_code}"
             else:
-                rec.code = f"{prefix}_{month}_{account_code}"
+                rec.name = f"{prefix}_{month}_{account_code}"
+
+    @api.depends('amount')
+    def _compute_accumulated_amount(self):
+        for rec in self:
+            po_lines = self.env['purchase.order.line'].search([
+                ('budget_id', '=', rec.id),
+            ])
+            rec.accumulated_amount = sum(po_lines.mapped('price_subtotal'))

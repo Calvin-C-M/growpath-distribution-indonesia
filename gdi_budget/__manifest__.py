@@ -14,7 +14,8 @@
         'account_reports',
     ],
     'data': [
-        'views/account_report_budget_view_inherit.xml'
+        'views/account_report_budget_view_inherit.xml',
+        'views/purchase_order_view_inherit.xml',
     ],
     'installable': True,
     'application': False,
