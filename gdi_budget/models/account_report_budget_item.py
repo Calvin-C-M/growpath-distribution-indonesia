@@ -13,15 +13,21 @@ class AccountReportBudgetItem(models.Model):
     def _compute_code(self):
         for rec in self:
             prefix = 'WBS'
-            month = date(1990, rec.date.month, 1).strftime('%b').upper()
-            account_code = rec.account_id.code
-            analytic_account = rec.distribution_analytic_account_ids[0] if rec.distribution_analytic_account_ids else None
-            
-            if analytic_account:
-                rec.name = f"{prefix}_{analytic_account.name}_{month}_{account_code}"
-            else:
-                rec.name = f"{prefix}_{month}_{account_code}"
+            name = f"{prefix}"
 
+            analytic_account = rec.distribution_analytic_account_ids[0] if rec.distribution_analytic_account_ids else None
+            if analytic_account:
+                name += f"_{analytic_account.name}"
+
+            if rec.date:
+                month = date(1990, rec.date.month, 1).strftime('%b').upper()
+                name += f"_{month}"
+
+            if rec.account_id:
+                name += f"_{rec.account_id.code}"
+
+            rec.name = name
+            
     @api.depends('amount')
     def _compute_accumulated_amount(self):
         for rec in self:
