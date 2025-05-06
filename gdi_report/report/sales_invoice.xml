@@ -152,9 +152,9 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                                      <t t-if="o.get_so()">
                                         <h6 t-if="o.get_so().name" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Order Number</h6>
                                     </t>
-                                    <t t-if="o.get_so()">
+                                    <!-- <t t-if="o.get_so()">
                                         <h6 t-if="o.get_so().sh_po_no" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">PO Number</h6>
-                                    </t>
+                                    </t> -->
                                     <t t-if="o.get_so()">
                                         <h6 t-if="o.get_so().client_order_ref" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Customer Ref</h6>
                                     </t>
@@ -176,9 +176,9 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                                     <t t-if="o.get_so()">
                                         <h6 t-if="o.get_so().name" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Source ( Refer to SO )</h6>
                                     </t>
-                                    <t t-if="o.get_so()">
+                                    <!-- <t t-if="o.get_so()">
                                         <h6 t-if="o.get_so().sh_po_no" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">PO Number</h6>
-                                    </t>
+                                    </t> -->
                                     <t t-if="o.get_so()">
                                         <h6 t-if="o.get_so().client_order_ref" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Customer Ref</h6>
                                     </t>
@@ -201,9 +201,9 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                                     <t t-if="o.get_so()">
                                         <p t-if="o.get_so().name" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.get_so().name"/>
                                     </t>
-                                    <t t-if="o.get_so()">
+                                    <!-- <t t-if="o.get_so()">
                                         <p t-if="o.get_so().sh_po_no" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.get_so().sh_po_no"/>
-                                    </t>
+                                    </t> -->
                                     <t t-if="o.get_so()">
                                         <p t-if="o.get_so().client_order_ref" style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.get_so().client_order_ref"/>
                                     </t>

@@ -41,7 +41,7 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                     </t>
                 </t>
 
-                <div class="header">
+                <div class="" style="">
                     <div class="row">
                         <div class="col-3">
                             <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height: 120px; width: 320px; justify-content: center; text-align: center;" alt="Logo"/>
@@ -136,13 +136,15 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                    </div> 
 
                    <div class="row">
-                        <span>JTI General Term / Ketentuan Umum JTI</span>
+                        <span>GDI General Term / Ketentuan Umum JTI</span>
+                        <br />
                         <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf">
                             https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf
                         </a>
                         <br />
                         <br />
-                        <span>JTI Billing Procedure / Prosedur Penagihan</span>
+                        <span>GDI Billing Procedure / Prosedur Penagihan</span>
+                        <br />
                         <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_Invoice_Submission_Process.pdf">
                             https://files.jti.com/pages/TC/TC_JTI_Indonesia_Invoice_Submission_Process.pdf
                         </a>
@@ -279,7 +281,7 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
 
                     <p t-field="o.notes" class="mt-4"/>
 
-                    <img src="/gdi_report/static/src/img/syarat.png" alt="Syarat &amp; Ketentuan" style="width:300px;" />
+                    <img t-att-src="'/gdi_report/static/img/syarat.png'" alt="Syarat &amp; Ketentuan" style="width:60%;" />
 
                     <div class="oe_structure"/>
 
@@ -297,7 +299,7 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
 
 
 
-                <div class="footer justify-content-center" style="color: 212121;">
+                <div class="justify-content-center" style="color: 212121; padding-bottom: 11mm;">
                             <div class="row">
                                 <div class="col-3"/>
                                 <div class="col-4" style="font-family: 'Calibri'; font-weight: bold;">

@@ -20,7 +20,15 @@
         "report/delivery_order.xml",
         
     ],
-    "images": ["static/description/background.jpg", ],
+    "images": [
+        # "static/description/background.jpg", 
+        # "static/img/syarat.jpg", 
+    ],
+    "assets": {
+        'web.assets_common': [
+            'gdi_report/static/img/*',
+        ],
+    },
     "auto_install": False,
     "installable": True,
 }
