@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="budget_analytic_form_view_inherit_gdi_budget" model="ir.ui.view">
+        <field name="name">budget.analytic.form.view.inherit.gdi.budget</field>
+        <field name="model">budget.analytic</field>
+        <field name="inherit_id" ref="account_budget.view_budget_analytic_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='budget_line_ids']/list/field[@name='account_id']" position="after">
+                <field name="code" />
+                <field name="account_account_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

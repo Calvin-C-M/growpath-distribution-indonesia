@@ -12,9 +12,11 @@
     'depends': [
         'gdi_base',
         'account_reports',
+        'account_budget',
     ],
     'data': [
-        'views/account_report_budget_view_inherit.xml',
+        'views/budget_analytic_view_inherit.xml',
+        # 'views/account_report_budget_view_inherit.xml',
         'views/purchase_order_view_inherit.xml',
     ],
     'installable': True,
