@@ -13,20 +13,11 @@ class PurchaseOrderLine(models.Model):
         store=True,
         help="Budget line linked to this purchase order line.",
     )
-    is_above_budget = fields.Boolean(store=True)
 
     @api.depends('budget_line_ids')
     def _compute_budget_line_id(self):
         for line in self:
             line.budget_line_id = line.budget_line_ids[0] if line.budget_line_ids else False
-
-    @api.constrains("budget_line_id")
-    def _check_budget_line_id(self):
-        for line in self:
-            if line.budget_line_id and line.is_above_budget:
-                raise ValidationError(
-                    f"The selected limit is over budget of {line.budget_line_id.code}."
-                )
     
     @api.depends('analytic_distribution')
     def _compute_budget_line_ids(self):
@@ -50,6 +41,7 @@ class PurchaseOrderLine(models.Model):
 
         for domain, lines in self.grouped(get_domain).items():
             lines.budget_line_ids = bool(domain) and self.sudo().env['budget.line'].search(list(domain))
+
 
     # budget_id = fields.Many2one(
     #     comodel_name="account.report.budget.item",

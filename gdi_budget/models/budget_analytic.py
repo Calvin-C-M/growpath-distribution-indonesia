@@ -13,11 +13,6 @@ class BudgetLine(models.Model):
         help='Account linked to this budget item.',
     )
     
-    achieved_amount = fields.Monetary(store=True)
-    achieved_percentage = fields.Float(store=True)
-    committed_amount = fields.Monetary(store=True)
-    committed_percentage = fields.Float(store=True)
-
     @api.depends('account_account_id', 'account_id', 'date_from')
     def _compute_code(self):
         for rec in self:
