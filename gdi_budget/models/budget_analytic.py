@@ -15,14 +15,24 @@ class BudgetLine(models.Model):
     
     @api.depends('account_account_id', 'account_id', 'date_from')
     def _compute_code(self):
+        analytic_plans = self.env['account.analytic.plan'].search([])
+
         for rec in self:
             prefix = 'WBS'
             name = f"{prefix}"
 
             if rec.account_id:
-                analytic_account = rec.account_id.name
+                analytic_account = rec.account_id.code
                 if analytic_account:
                     name += f"_{analytic_account}"
+
+            for plan in analytic_plans:
+                field_name = f'x_plan{plan.id}_id'
+                if hasattr(rec, field_name):
+                    plan_value = getattr(rec, field_name)
+                    if plan_value:
+                        name += f"_{plan_value.code}"
+
 
             if rec.date_from:
                 month = rec.date_from.strftime('%b').upper()
