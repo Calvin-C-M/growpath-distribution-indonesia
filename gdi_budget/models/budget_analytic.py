@@ -40,15 +40,26 @@ class BudgetLine(models.Model):
 
     @api.constrains('account_account_id')
     def _check_account_account_id(self):
+        analytic_plans = self.env['account.analytic.plan'].search([])
         for rec in self:
-            other_budget_lines = self.search([
+            domain = [
                 ('id', '!=', rec.id),
                 ('account_account_id', '=', rec.account_account_id.id),
                 ('account_id', '=', rec.account_id.id),
                 ('date_from', '<=', rec.date_from),
                 ('date_to', '>=', rec.date_from),
-            ])
+            ]
+
+            # Dynamically add all analytic plan fields
+            for plan in analytic_plans:
+                field_name = f'x_plan{plan.id}_id'
+                if hasattr(rec, field_name):
+                    plan_value = getattr(rec, field_name)
+                    if plan_value:
+                        domain.append((field_name, '=', plan_value.id))
+
+            other_budget_lines = self.search(domain)
             if other_budget_lines:
                 raise ValidationError(
-                    f"Budget line with the same account and date range already exists"
+                    "Budget line with the same account, analytic plan(s), and overlapping date range already exists."
                 )
