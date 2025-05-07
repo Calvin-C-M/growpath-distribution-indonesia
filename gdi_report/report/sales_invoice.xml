@@ -75,7 +75,7 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
 
                 <div class="row">
                     <div class="col-3">
-                       <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height: 176px; width: 258px; justify-content: center; text-align: center;" alt="Logo"/>
+                       <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height: 120px; width: 320px; justify-content: center; text-align: center;" alt="Logo"/>
                     </div>
                     <div class="col-3"/>
                     <div class="col-6">
