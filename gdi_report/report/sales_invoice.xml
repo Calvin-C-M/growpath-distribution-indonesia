@@ -73,7 +73,7 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                 </div>
 
 
-                <div class="row header">
+                <div class="row">
                     <div class="col-3">
                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height: 176px; width: 258px; justify-content: center; text-align: center;" alt="Logo"/>
                     </div>
@@ -375,7 +375,14 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                                         <small class="text-muted lh-sm"><span t-field="o.amount_total_words">Thirty one dollar and Five cents</span></small>
                                     </p>
                                 </div>
-                                <t t-call="account.document_tax_totals_company_currency_template"/>
+
+                                <t t-if="o.tax_totals.get('display_in_company_currency')">
+                                    <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                    <t t-call="account.document_tax_totals_company_currency_template"/>
+                                </t>
+                                <t t-else="">
+                                    <div class="oe_structure"/>
+                                </t>
                             </div>
                              
 
@@ -444,6 +451,37 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                         </div>
                     </div>
 
+                    <table style="border-collapse: collapse; width: 100%; font-size: 12px;">
+                        <thead>
+                          <tr>
+                            <th style="border-bottom: 1px solid black; text-align: left;">Vendor Berbadan Hukum</th>
+                            <th style="border-bottom: 1px solid black; text-align: left;">Vendor Perseorangan</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Mengisi Formulir pendaftaran Vendor</td>
+                            <td style="border-bottom: 1px solid #ccc;">Mengisi Formulir pendaftaran Vendor</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Melampirkan Nomor Induk Berusaha (NIB) disertai Klasifikasi Baku Lapangan Usaha Indonesia (KBLI)</td>
+                            <td style="border-bottom: 1px solid #ccc;">Melampirkan KTP/Paspor</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Melampirkan Nomor Pokok Wajib Pajak (NPWP) &amp; Surat Pengukuhan Pengusaha Kena Pajak (SPPKP) jika diperlukan</td>
+                            <td style="border-bottom: 1px solid #ccc;">Melampirkan Nomor Pokok Wajib Pajak (NPWP) &amp; Surat Pengukuhan Pengusaha Kena Pajak (SPPKP) jika diperlukan</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Melampirkan Buku rekening/Rekening koran &amp; Surat pernyataan identitas bank penerima jika diperlukan</td>
+                            <td style="border-bottom: 1px solid #ccc;">Melampirkan Buku rekening/Rekening koran &amp; Surat pernyataan identitas bank penerima jika diperlukan</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Melampirkan Akta pendirian perusahaan</td>
+                            <td style="border-bottom: 1px solid #ccc;"></td>
+                          </tr>
+                        </tbody>
+                      </table>                      
+
 
 
                      <div class="row bottom_area" style="padding: 10px 0px 0px;">
@@ -463,74 +501,7 @@ src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype
                 </div>
 
 
-                <div class="footer justify-content-center" style="color: 212121;">
-                    <div class="row">
-                        <div class="col-3" style="font-family: 'Times New Roman'; font-weight: bold;">
-                            <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.name"/>
-                            <t t-if="o.company_id.street">
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.street"/>
-                            </t>
-                            <t t-if="o.company_id.street2"><span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.street2"/></t>
-                            <p style="line-height: 10px; margin-bottom: 0px;">
-                            	<t t-if="o.company_id.city">
-                            		<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.city"/>
-                            		<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">,</span>
-                            	</t>
-                            </p>
-                            <p style="line-height: 10px; margin-bottom: 0px;">
-                                <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.state_id.name"/>,
-                                <t t-if="o.company_id.country_id">
-                                	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.country_id.name"/>-
-                                </t>
-                                <t t-if="o.company_id.zip">
-                                	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.zip"/>
-                                </t>
-                            </p>
-                        </div>
-                        <div class="col-3" style="font-family: 'Times New Roman'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
-                        	<t t-if="o.company_id.phone">
-                        		<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Tel :</span>
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.phone"/><br/>
-                        	</t>
-                            <t t-if="o.company_id.fax">
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Fax :</span>
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.fax"/><br/>
-                            </t>
-                            <t t-if="o.company_id.website">
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.website"/>
-                            </t>
-                        </div>
-                        <div class="col-3" style="font-family: 'Times New Roman'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
-                        	<t t-if="o.company_id.vat">
-                        		<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Vat Reg.No : </span>
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.vat"/><br/>
-                        	</t>
-                            <t t-if="o.company_id.business_id">
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Business ID .no: </span>
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.business_id"/><br/>
-                            </t>
-                            <t t-if="o.company_id.registered_office">
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Registered Office: </span>
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.registered_office"/>
-                            </t>
-
-                        </div>
-                        <div class="col-3" style="font-family: 'Times New Roman'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
-                        	<t t-if="o.company_id.bank_acc_no">
-                        		<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Bank account no. : </span>
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.bank_acc_no"/><br/>
-                        	</t>
-                            <t t-if="o.company_id.iban">
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">IBAN: </span>
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.iban"/><br/>
-                            </t>
-                            <t t-if="o.company_id.swift">
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">SWIFT: </span>
-                            	<span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.swift"/>
-                            </t>
-                        </div>
-                    </div>
-                    <br/>
+                <div class="justify-content-center" style="color: 212121;">
 
                     <div t-if="report_type == 'pdf'" class="text-center" style="margin-top: 5px; color: 212121; font-weight: bold;">
                         <span style="font-family: 'Times New Roman'; line-height: 10px; font-size: 10px;">Page</span>

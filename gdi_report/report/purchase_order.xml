@@ -136,7 +136,7 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                    </div> 
 
                    <div class="row">
-                        <span>GDI General Term / Ketentuan Umum JTI</span>
+                        <span>GDI General Term / Ketentuan Umum GDI</span>
                         <br />
                         <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf">
                             https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf
@@ -281,7 +281,73 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
 
                     <p t-field="o.notes" class="mt-4"/>
 
-                    <img t-att-src="'/gdi_report/static/img/syarat.png'" alt="Syarat &amp; Ketentuan" style="width:60%;" />
+                    <table style="border-collapse: collapse; width: 60%; font-size: 12px;">
+                        <thead>
+                          <tr>
+                            <th style="border-bottom: 1px solid black;">Invoice Requirement</th>
+                            <th style="border-bottom: 1px solid black;">/</th>
+                            <th style="border-bottom: 1px solid black;">Persyaratan Invoice:</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Document type (Invoice; Debit Note; Credit Note) and Number</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Tipe dokumen (<i>Invoice; Debit Note; Credit Note</i>) dan Nomor</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Invoice Date</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Tanggal Tagihan</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Company Legal entity name and address</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Nama resmi Perusahaan dan alamat</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Vendor Company name and address</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Nama Perusahaan Supplier dan alamat</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Company Purchase Order number</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Nomor <i>Purchase Order</i> Perusahaan</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">VAT Amount (if any)</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Jumlah PPN (jika ada)</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">WHT Amount (if any)</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Jumlah PPh (jika ada)</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">VAT Invoice (if any)</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Faktur Pajak PPN (jika ada)</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Bank Account Number</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Nomor Rekening</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Bank Account Holder</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Nama Rekening penerima</td>
+                          </tr>
+                          <tr>
+                            <td style="border-bottom: 1px solid #ccc;">Total Invoice amount</td>
+                            <td style="border-bottom: 1px solid #ccc;">/</td>
+                            <td style="border-bottom: 1px solid #ccc;">Total jumlah Tagihan</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      
 
                     <div class="oe_structure"/>
 
@@ -300,59 +366,13 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
 
 
                 <div class="justify-content-center" style="color: 212121; padding-bottom: 11mm;">
-                            <div class="row">
-                                <div class="col-3"/>
-                                <div class="col-4" style="font-family: 'Calibri'; font-weight: bold;">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.name"/>
-                                    <t t-if="o.company_id.street">
-                                    	<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.street"/>
-                                    </t>
-                                    <t t-if="o.company_id.street2"><span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="o.company_id.street2"/></t>
-                                    <p style="line-height: 10px; margin-bottom: 0px;">
-                                    	<t t-if="o.company_id.city">
-                                    		<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.city"/>
-                                    		<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">,</span>	
-                                    	</t>
-                                    </p>
-                                    <p style="line-height: 10px; margin-bottom: 0px;">
-                                    	<t t-if="o.company_id.state_id">
-                                    		<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.state_id.name"/>,
-                                    	</t>
-                                    	<t t-if="o.company_id.country_id">
-                                    		<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.country_id.name"/>-
-                                    	</t>
-                                    	<t t-if="o.company_id.zip">
-                                    		<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.zip"/>
-                                    	</t>
-                                    </p>
-                                </div>
-                                <div class="col-3" style="font-family: 'Calibri'; font-weight: bold;">
-                                    <p style="line-height: 10px; margin-bottom: 0px;">
-                                    	<t t-if="o.company_id.phone">
-                                    		<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Tel : </span>
-                                        	<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.phone"/>
-                                    	</t>
-                                    </p>
-                                    <!-- <p style="line-height: 10px; margin-bottom: 0px;">
-                                    	<t t-if="o.company_id.fax">
-                                    		<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Fax : </span>
-                                        	<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.fax"/>
-                                    	</t>
-                                    </p> -->
-                                    <t t-if="o.company_id.website">
-                                    	<span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="o.company_id.website"/>
-                                    </t>
-                                </div>
-                                <div class="col-2"/>
-                            </div>
-                            <br/>
-                            <div t-if="report_type == 'pdf'" class="text-center" style="margin-top: 5px; color: 212121; font-weight: bold;">
-                                <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px;">Page</span>
-                                <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="page"/>
-                                <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">/</span>
-                                <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="topage"/>
-                            </div>
-                        </div>
+                    <div t-if="report_type == 'pdf'" class="text-center" style="margin-top: 5px; color: 212121; font-weight: bold;">
+                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px;">Page</span>
+                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="page"/>
+                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">/</span>
+                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="topage"/>
+                    </div>
+                </div>
                 
             </t>
         </t>
