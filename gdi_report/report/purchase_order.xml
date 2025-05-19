@@ -41,7 +41,7 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                     </t>
                 </t>
 
-                <div class="" style="">
+                <div class="header" style="">
                     <div class="row">
                         <div class="col-3">
                             <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height: 120px; width: 320px; justify-content: center; text-align: center;" alt="Logo"/>
@@ -365,7 +365,7 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
 
 
 
-                <div class="justify-content-center" style="color: 212121; padding-bottom: 11mm;">
+                <div class="footer justify-content-center" style="color: 212121; padding-bottom: 11mm;">
                     <div t-if="report_type == 'pdf'" class="text-center" style="margin-top: 5px; color: 212121; font-weight: bold;">
                         <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px;">Page</span>
                         <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="page"/>
