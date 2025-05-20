@@ -27,6 +27,7 @@
     "assets": {
         'web.assets_common': [
             'gdi_report/static/img/*',
+            'gdi_report/static/files/*',
         ],
     },
     "auto_install": False,

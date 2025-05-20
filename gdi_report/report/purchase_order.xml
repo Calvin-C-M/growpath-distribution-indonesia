@@ -145,8 +145,8 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                         <br />
                         <span>GDI Billing Procedure / Prosedur Penagihan</span>
                         <br />
-                        <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_Invoice_Submission_Process.pdf">
-                            https://files.jti.com/pages/TC/TC_JTI_Indonesia_Invoice_Submission_Process.pdf
+                        <a href="/gdi_report/static/files/TC_GDI_Invoice_Submission_Process.pdf">
+                            https://moneymap.pfigroups.com/gdi_report/static/files/TC_GDI_Invoice_Submission_Process.pdf
                         </a>
                    </div>
 
