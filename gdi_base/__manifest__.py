@@ -17,8 +17,10 @@
         'purchase_request_tier_validation',
     ],
     'data': [
+        'data/ir_sequence.xml',
         'views/purchase_order_views_inherit.xml',
         'views/stock_picking_views_inherit.xml',
+        # 'views/res_company_views_inherit.xml',
     ],
     'installable': True,
     'application': False,
