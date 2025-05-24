@@ -9,15 +9,16 @@ class AccountMove(models.Model):
         self = self.sorted(lambda m: (m.date, m.ref or '', m._origin.id))
 
         for move in self:
-            if move.move_type == 'out_invoice':
+            if move.state == 'cancel':
+                continue
+
+            move_has_name = move.name and move.name != '/'
+
+            if move.move_type == 'out_invoice' and not move_has_name:
                 move.name = self.env['ir.sequence'].next_by_code('account.move.invoice') or '/'
-            elif move.move_type == 'in_invoice':
+            elif move.move_type == 'in_invoice' and not move_has_name:
                 move.name = self.env['ir.sequence'].next_by_code('account.move.vendor.bill') or '/'
             else:
-                if move.state == 'cancel':
-                    continue
-
-                move_has_name = move.name and move.name != '/'
                 if not move.posted_before and not move._sequence_matches_date():
                     # The name does not match the date and the move is not the first in the period:
                     # Reset to draft
