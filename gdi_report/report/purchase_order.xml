@@ -284,66 +284,66 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                     <table style="border-collapse: collapse; width: 60%; font-size: 12px;">
                         <thead>
                           <tr>
-                            <th style="border-bottom: 1px solid black;">Invoice Requirement</th>
-                            <th style="border-bottom: 1px solid black;">/</th>
-                            <th style="border-bottom: 1px solid black;">Persyaratan Invoice:</th>
+                            <th style="border: none;">Invoice Requirement</th>
+                            <th style="border: none;">/</th>
+                            <th style="border: none;">Persyaratan Invoice:</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">Document type (Invoice; Debit Note; Credit Note) and Number</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Tipe dokumen (<i>Invoice; Debit Note; Credit Note</i>) dan Nomor</td>
+                            <td style="border: none; padding: 0px 3px;">Document type (Invoice; Debit Note; Credit Note) and Number</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Tipe dokumen (<i>Invoice; Debit Note; Credit Note</i>) dan Nomor</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">Invoice Date</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Tanggal Tagihan</td>
+                            <td style="border: none; padding: 0px 3px;">Invoice Date</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Tanggal Tagihan</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">Company Legal entity name and address</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Nama resmi Perusahaan dan alamat</td>
+                            <td style="border: none; padding: 0px 3px;">Company Legal entity name and address</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Nama resmi Perusahaan dan alamat</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">Vendor Company name and address</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Nama Perusahaan Supplier dan alamat</td>
+                            <td style="border: none; padding: 0px 3px;">Vendor Company name and address</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Nama Perusahaan Supplier dan alamat</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">Company Purchase Order number</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Nomor <i>Purchase Order</i> Perusahaan</td>
+                            <td style="border: none; padding: 0px 3px;">Company Purchase Order number</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Nomor <i>Purchase Order</i> Perusahaan</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">VAT Amount (if any)</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Jumlah PPN (jika ada)</td>
+                            <td style="border: none; padding: 0px 3px;">VAT Amount (if any)</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Jumlah PPN (jika ada)</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">WHT Amount (if any)</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Jumlah PPh (jika ada)</td>
+                            <td style="border: none; padding: 0px 3px;">WHT Amount (if any)</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Jumlah PPh (jika ada)</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">VAT Invoice (if any)</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Faktur Pajak PPN (jika ada)</td>
+                            <td style="border: none; padding: 0px 3px;">VAT Invoice (if any)</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Faktur Pajak PPN (jika ada)</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">Bank Account Number</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Nomor Rekening</td>
+                            <td style="border: none; padding: 0px 3px;">Bank Account Number</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Nomor Rekening</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">Bank Account Holder</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Nama Rekening penerima</td>
+                            <td style="border: none; padding: 0px 3px;">Bank Account Holder</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Nama Rekening penerima</td>
                           </tr>
                           <tr>
-                            <td style="border-bottom: 1px solid #ccc;">Total Invoice amount</td>
-                            <td style="border-bottom: 1px solid #ccc;">/</td>
-                            <td style="border-bottom: 1px solid #ccc;">Total jumlah Tagihan</td>
+                            <td style="border: none; padding: 0px 3px;">Total Invoice amount</td>
+                            <td style="border: none; padding: 0px 3px;">/</td>
+                            <td style="border: none; padding: 0px 3px;">Total jumlah Tagihan</td>
                           </tr>
                         </tbody>
                       </table>
