@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="account_move_form_view_inherit_gdi_budget" model="ir.ui.view">
+        <field name="name">account.move.form.view.inherit.gdi.budget</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//" position="after">
+                <field name="budget_line_id" />
+                <!-- <field name="code" />
+                <field name="account_account_id" /> -->
+            </xpath>
+        </field>
+    </record>
+</odoo>
