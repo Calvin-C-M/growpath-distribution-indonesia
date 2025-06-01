@@ -19,7 +19,7 @@
     ],
     'data': [
         'data/ir_sequence.xml',
-        'views/account_journal_views_inherit.xml',
+        # 'views/account_journal_views_inherit.xml',
         'views/purchase_order_views_inherit.xml',
         'views/stock_picking_views_inherit.xml',
         # 'views/res_company_views_inherit.xml',
