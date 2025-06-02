@@ -24,6 +24,6 @@ class AccountMoveLine(models.Model):
         for rec in self:
             if rec in rec.move_id.invoice_line_ids:
                 source_orders = rec.move_id.invoice_line_ids.sale_line_ids.order_id
-                if source_orders and not rec.purchase_line_id:
-                    raise ValidationError('Sale line must be part of the purchase order')
+                if source_orders and rec.id not in rec.move_id.invoice_line_ids.sale_line_ids.mapped('invoice_lines').ids:
+                    raise ValidationError('Sale line must be part of the sales')
         
