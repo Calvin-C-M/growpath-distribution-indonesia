@@ -138,8 +138,8 @@ src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
                    <div class="row">
                         <span>GDI General Term / Ketentuan Umum GDI</span>
                         <br />
-                        <a href="https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf">
-                            https://files.jti.com/pages/TC/TC_JTI_Indonesia_EN_IND.pdf
+                        <a href="/gdi_report/static/files/PO_Term_Path_Finder_Group_23_May_2025.pdf">
+                            https://moneymap.pfigroups.com/gdi_report/static/files/PO_Term_Path_Finder_Group_23_May_2025.pdf
                         </a>
                         <br />
                         <br />
