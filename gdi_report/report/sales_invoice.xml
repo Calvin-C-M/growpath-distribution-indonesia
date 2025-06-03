@@ -79,10 +79,10 @@
                     </div>
                     <div class="col-3"/>
                     <div class="col-6">
-                        <h2 style="margin-top: -15px; padding-bottom: 22px; font-family: 'Calibri'; font-weight: bold;">
-                            <p style="font-size: 31.25px; font-family: 'Calibri';" t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</p>
-                            <p style="font-size: 31.25px; font-family: 'Calibri';" t-if="o.move_type == 'out_invoice' and o.state == 'draft'">Draft Invoice</p>
-                            <p style="font-size: 31.25px; font-family: 'Calibri';" t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</p>
+                        <h2 style="margin-top: -15px; padding-bottom: 22px; font-family: 'Calibri';">
+                            <p style="font-size: 31.25px; font-family: 'Calibri'; font-weight: bold; text-align: right;" t-if="o.move_type == 'out_invoice' and o.state == 'posted'">INVOICE</p>
+                            <p style="font-size: 31.25px; font-family: 'Calibri'; font-weight: bold; text-align: right;" t-if="o.move_type == 'out_invoice' and o.state == 'draft'">DRAFT INVOICE</p>
+                            <p style="font-size: 31.25px; font-family: 'Calibri'; font-weight: bold; text-align: right;" t-if="o.move_type == 'out_invoice' and o.state == 'cancel'">CANCELLED INVOICE</p>
                             <p style="font-size: 31.25px; font-family: 'Calibri';" t-if="o.move_type == 'out_refund'">Credit Note</p>
                             <p style="font-size: 31.25px; font-family: 'Calibri';" t-if="o.move_type == 'in_refund'">Vendor Credit Note</p>
                             <p style="font-size: 31.25px; font-family: 'Calibri';" t-if="o.move_type == 'in_invoice'">Vendor Bill</p>
