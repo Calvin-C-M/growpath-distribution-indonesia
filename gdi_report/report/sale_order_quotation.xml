@@ -139,9 +139,9 @@
                                 <t t-if="doc.state != 'draft'">
                                     <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Order Number</h6>
                                 </t>
-                                <t t-if="doc.vessel_id">
+                                <!-- <t t-if="doc.vessel_id">
                                     <h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Project</h6>
-                                </t>
+                                </t> -->
                                 <t t-if="doc.user_id">
                                 	<h6 style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Sales Representative</h6>	
                                 </t>
@@ -165,9 +165,9 @@
                                 <t t-if="doc.state != 'draft'">
                                     <p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; color: #800000; font-weight: bold;" t-esc="doc.name"/>
                                 </t>
-                                <t t-if="doc.vessel_id">
+                                <!-- <t t-if="doc.vessel_id">
                                 	<p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="doc.vessel_id.name"/>
-                                </t>
+                                </t> -->
                                 
                                 <t t-if="doc.user_id">
                                 	<p style="font-family: 'Times New Roman'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="doc.user_id.name"/>
