@@ -5,11 +5,6 @@
         <t t-call="web.html_container">
             <t t-call="web.basic_layout">
                 <style type="text/css">
-                    @font-face {
-                        font-family: 'Calibri';
-                        src: url('/gdi_report/static/font/Times_New_Roman.ttf')  format('truetype');
-                    }
-
                     h1,
                     h2,
                     h3,
@@ -35,20 +30,6 @@
                     }
                 </style>
 
-                <!-- <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
-                <t t-set="address">
-                    <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;vat&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
-                </t>
-                <t t-if="o.dest_address_id">
-                    <t t-set="information_block">
-                        <strong>Ship To:</strong>
-                        <div t-if="o.dest_address_id">
-                            <div t-field="o.dest_address_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}" name="purchase_shipping_address"/>
-                        </div>
-
-                    </t>
-                </t> -->
-
                 <div class="header">
                     <div class="row" style="margin-bottom: 30px;">
                         <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="height: 120px; width: auto; justify-content: center; text-align: center;" alt="Logo"/>                          
@@ -64,6 +45,7 @@
                             </h2>
                         </div>
                         <div class="col-3" />
+                        <div class="col-3" />
                         <div class="col-3">
                             <!-- <div style="padding: 12px 0px;"/> -->
                             <div class="row">
@@ -77,7 +59,7 @@
                                     <div>
                                         <t t-if="o.state == 'draft'"><p style="font-size: 13.12px; font-family: 'Calibri'; line-height: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.date_order" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/></t>
                                         <t t-else=""><p style="font-size: 13.12px; font-family: 'Calibri'; line-height: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.date_approve" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/></t>
-                                        <h6 style="font-size: 13.12px; font-family: 'Calibri'; line-height: 31.25px; padding: 0px; margin-bottom: 5px; color: #800000; font-weight: bold;" t-esc="o.name"/>
+                                        <h6 style="font-size: 13.12px; font-family: 'Calibri'; line-height: 31.25px; padding: 0px; margin-bottom: 5px;" t-esc="o.name"/>
                                     </div>
                                 </div>
                             </div>

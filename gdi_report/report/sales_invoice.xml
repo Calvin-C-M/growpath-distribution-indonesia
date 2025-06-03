@@ -8,10 +8,6 @@
             <t t-call="web.basic_layout">
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 <style type="text/css">
-                	@font-face {
-                        font-family: 'Calibri';
-                        src: url('/sh_thomas_reports/static/font/Times_New_Roman.ttf')  format('truetype');
-                    }
                     h1,
                     h2,
                     h3,
