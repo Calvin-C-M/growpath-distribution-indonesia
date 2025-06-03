@@ -133,13 +133,13 @@
                             <div class="col-3"/>
                             <div class="col-3" style="flex: 0 0 20%; max-width: 20%; text-align: right;">
                                 <t t-if="o.move_type != 'out_refund'">
-                                    <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Order Number</h6>
+                                    <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">INVOICE #</h6>
                                 </t>
                                 <t t-if="o.invoice_date">
-                                    <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Date</h6>
+                                    <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">DATE</h6>
                                 </t>
                                 <t t-if="o.invoice_date_due">
-                                    <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Due Date</h6>
+                                    <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">DUE DATE</h6>
                                 </t>
 
                                 <t t-if="o.move_type == 'out_refund'">
