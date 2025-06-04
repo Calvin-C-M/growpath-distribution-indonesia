@@ -133,15 +133,15 @@
                    <div class="row" style="margin-top: 25px;">
                         <span class="text-description">General Term / Ketentuan Umum</span>
                         <br />
-                        <a class="text-description" href="/gdi_report/static/files/PO_Term_Path_Finder_Group_23_May_2025.pdf">
-                            https://moneymap.pfigroups.com/gdi_report/static/files/PO_Term_Path_Finder_Group_23_May_2025.pdf
+                        <a class="text-description" href="/gdi_report/static/files/PO_Term_-_Path_Finder_Group_2025.pdf">
+                            https://moneymap.pfigroups.com/gdi_report/static/files/PO_Term_-_Path_Finder_Group_2025.pdf
                         </a>
                         <br />
                         <br />
                         <span class="text-description">Billing Procedure / Prosedur Penagihan</span>
                         <br />
-                        <a class="text-description" href="/gdi_report/static/files/TC_GDI_Invoice_Submission_Process.pdf">
-                            https://moneymap.pfigroups.com/gdi_report/static/files/TC_GDI_Invoice_Submission_Process.pdf
+                        <a class="text-description" href="/gdi_report/static/files/TC_PFI_Indonesia_Invoice_Submission_Process.pdf">
+                            https://moneymap.pfigroups.com/gdi_report/static/files/TC_PFI_Indonesia_Invoice_Submission_Process.pdf
                         </a>
                    </div>
 
@@ -268,7 +268,8 @@
                     <div class="clearfix"/>
                     <div class="clearfix row bottom_area d-flex justify-content-end">
                         <div style="text-align: right;">
-                            <p style="margin-bottom: 75px; font-family: 'Calibri';">Authorized by ,</p>
+                            <p style="font-family: 'Calibri';">Authorized by ,</p>
+                            <img src="/gdi_report/static/img/purchase_signature.jpg" style="height: 100px; width: 100px;"/>
                             <h6>Purchasing Executive</h6>
                         </div>
                     </div>
@@ -283,6 +284,9 @@
                         <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="page"/>
                         <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">/</span>
                         <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="topage"/>
+                    </div>
+                    <div>
+                        This document has been signed digitally
                     </div>
                 </div>
                 
