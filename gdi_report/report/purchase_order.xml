@@ -59,7 +59,7 @@
                                     <div>
                                         <t t-if="o.state == 'draft'"><p style="font-size: 13.12px; font-family: 'Calibri'; line-height: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.date_order" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/></t>
                                         <t t-else=""><p style="font-size: 13.12px; font-family: 'Calibri'; line-height: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.date_approve" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/></t>
-                                        <h6 style="font-size: 13.12px; font-family: 'Calibri'; line-height: 31.25px; padding: 0px; margin-bottom: 5px;" t-esc="o.name"/>
+                                        <h6 style="font-size: 13.12px; font-family: 'Calibri'; line-height: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.name"/>
                                     </div>
                                 </div>
                             </div>
@@ -285,7 +285,7 @@
                         <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">/</span>
                         <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" class="topage"/>
                     </div>
-                    <div>
+                    <div style="text-align: center; font-family: 'Calibri'; font-size: 10px; line-height: 10px;">
                         This document has been signed digitally
                     </div>
                 </div>
