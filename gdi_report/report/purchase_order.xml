@@ -52,7 +52,7 @@
                                 <div class="col-5">
                                     <div style="font-family: 'Calibri';">
                                         <h6 style="font-size: 13.12px; font-family: 'Calibri';  padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">Date</h6>	
-                                        <h6 style="font-size: 13.12px; font-family: 'Calibri';  padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">Purchase Order No.</h6>
+                                        <h6 style="font-size: 13.12px; font-family: 'Calibri';  padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">PO No.</h6>
                                     </div>
                                 </div>
                                 <div class="col-7" style="padding-left: 7px;">
