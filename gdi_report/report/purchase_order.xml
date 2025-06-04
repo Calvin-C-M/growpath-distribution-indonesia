@@ -269,7 +269,7 @@
                     <div class="clearfix row bottom_area d-flex justify-content-end">
                         <div style="text-align: right;">
                             <p style="font-family: 'Calibri';">Authorized by ,</p>
-                            <img src="/gdi_report/static/img/purchase_signature.jpg" style="height: 100px; width: 100px;"/>
+                            <img src="/gdi_report/static/img/purchase_signature.png" style="height: 100px; width: 100px;"/>
                             <h6>Purchasing Executive</h6>
                         </div>
                     </div>
