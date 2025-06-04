@@ -99,6 +99,7 @@
                             
                         </div>
                         <div class="col-3"/>
+                        <div class="col-3"/>
                         <div class="col-3">
                             <h6 style="font-size: 13.12px;  padding: 0px; margin-bottom: 5px; font-weight: bold; line-height: 13.12px;">Ship To:</h6>
                             <span style="font-family: 'Calibri';  line-height: 13.12px; font-size: 13.12px; margin-bottom: 5px; display: block;" t-esc="o.company_id.partner_id.name"/>
