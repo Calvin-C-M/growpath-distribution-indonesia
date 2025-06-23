@@ -24,50 +24,6 @@
                 </style>
                 <t t-set="o" t-value="o.with_context(lang=lang)"/>
                 <t t-set="forced_vat" t-value="o.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
-                <!-- <div class="row">
-                    <t t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)">
-                        <div class="col-6">
-                            <t t-set="information_block">
-                                <div groups="account.group_delivery_invoice_address" name="shipping_address_block">
-                                    <strong>Shipping Address:</strong>
-                                    <div t-field="o.partner_shipping_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                                </div>
-                            </t>
-                        </div>
-                        <div class="col-6" name="address_not_same_as_shipping">
-                            <t t-set="address">
-                                <address class="mb-0" t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                                <div t-if="o.partner_id.vat" id="partner_vat_address_not_same_as_shipping">
-                                    <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-out="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
-                                    <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/>
-                                </div>
-                            </t>
-                        </div>
-                    </t>
-                    <t t-elif="o.partner_shipping_id and (o.partner_shipping_id == o.partner_id)">
-                        <div class="offset-col-6 col-6" name="address_same_as_shipping">
-                            <t t-set="address">
-                                <address class="mb-0" t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                                <div t-if="o.partner_id.vat" id="partner_vat_address_same_as_shipping">
-                                    <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-out="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
-                                    <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/>
-                                </div>
-                            </t>
-                        </div>
-                    </t>
-                    <t t-else="">
-                        <div class="offset-col-6 col-6" name="no_shipping">
-                            <t t-set="address">
-                                <address class="mb-0" t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
-                                <div t-if="o.partner_id.vat" id="partner_vat_no_shipping">
-                                    <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-out="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
-                                    <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/>
-                                </div>
-                            </t>
-                        </div>
-                    </t>
-                </div> -->
-
 
                 <div class="row header">
                     <div class="col-3">
@@ -134,21 +90,6 @@
                                 </t>
 
                                 <t t-if="o.move_type == 'out_refund'">
-                                    <!-- <t t-if="o.vessel_id">
-                                        <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Project Name</h6>
-                                    </t>	 -->
-                                    <!-- <t t-if="o.get_so()">
-                                        <h6 t-if="o.get_so().name" style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Source ( Refer to SO )</h6>
-                                    </t> -->
-                                    <!-- <t t-if="o.get_so()">
-                                        <h6 t-if="o.get_so().sh_po_no" style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">PO Number</h6>
-                                    </t> -->
-                                    <!-- <t t-if="o.get_so()">
-                                        <h6 t-if="o.get_so().client_order_ref" style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Customer Ref</h6>
-                                    </t> -->
-                                    <!-- <t t-if="o.sh_invoice_ref">
-                                        <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Invoice Reference</h6>
-                                    </t> -->
                                 </t>
                             </div>
                             <div class="col-3" style="flex: 0 0 30%; text-align: right;">
@@ -162,16 +103,6 @@
                                     <p style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.invoice_date_due" t-options="{'widget':'date','format': 'dd/MM/YYYY'}"/>
                                 </t>
                                 <t t-if="o.move_type == 'out_refund'">
-                                    <!-- <t t-if="o.name">
-                                        <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; color: #800000; font-weight: bold;" t-esc="o.name"/>
-                                    </t>	
-                                    <t t-if="o.get_so()">
-                                        <p t-if="o.get_so().name" style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.get_so().name"/>
-                                    </t> -->
-                                    <!--
-                                    <t t-if="o.sh_invoice_ref">
-                                        <p style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; padding: 0px; margin-bottom: 5px;" t-esc="o.sh_invoice_ref" />
-                                    </t> -->
                                 </t>
                             </div>
                         </div>
@@ -214,15 +145,9 @@
                             <thead style="display: table-row-group">
                                 <tr>
                                     <th name="no" class="text-start">No</th>
-                                    <!-- <th name="part_no" class="text-start">Part No</th> -->
                                     <th name="th_description" class="text-start"><span>Description</span></th>
                                     <th name="th_quantity" class="text-end"><span>Quantity</span></th>
-                                    <!-- <th name="th_unit" class="text-end"><span>Unit</span></th> -->
                                     <th name="th_priceunit" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
-                                    <!-- <th name="th_discount" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                        <span>Disc.%</span>
-                                    </th> -->
-                                    <!-- <th name="th_taxes" t-attf-class="text-start {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th> -->
                                     <th name="th_subtotal" class="text-end">
                                         <span>Total</span>
                                     </th>
@@ -242,7 +167,6 @@
                                         <t t-if="line.display_type == 'product'" name="account_invoice_line_accountable">
                                             <t t-set="num" t-value="num+1"/>
                                             <td name="td_no"><span t-esc="num"/></td>
-                                            <!-- <td name="td_internaal_ref"><span t-field="line.product_id.default_code"/></td> -->
                                             <td name="account_invoice_line_name">
                                                 <t t-if="line.product_id">
                                                     <span t-field="line.product_id.name" t-options="{'widget': 'text'}"/><br/>
@@ -257,18 +181,9 @@
                                             <td name="td_quantity" class="text-end">
                                                 <span t-field="line.quantity">3.00</span>
                                             </td>
-                                            <!-- <td name="td_unit" class="text-end">
-                                                <span t-field="line.product_uom_id" groups="uom.group_uom">units</span>
-                                            </td> -->
                                             <td name="td_price_unit" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                                 <span class="text-nowrap" t-field="line.price_unit">9.00</span>
                                             </td>
-                                            <!-- <td name="td_discount" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                                <span class="text-nowrap" t-field="line.discount">0</span>
-                                            </td> -->
-                                            <!-- <td name="td_taxes" t-attf-class="text-start {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-                                                <span t-out="', '.join(map(lambda x: (x.invoice_label or x.name), line.tax_ids))" id="line_tax_ids"/>
-                                            </td> -->
                                             <td name="td_subtotal" class="text-end o_price_total">
                                                 <span class="text-nowrap" t-field="line.price_subtotal">27.00</span>
                                             </td>
@@ -388,14 +303,6 @@
                                         </div>
                                     </t>
                                 </div>
-                                <!-- <div class="mb-3" t-if="o.move_type in ('out_invoice', 'in_refund') and o.payment_reference">
-                                    <p name="payment_communication">
-                                        Payment Communication: <span class="fw-bold" t-field="o.payment_reference">INV/2023/00001</span>
-                                    </p>
-                                    <p name="bank">
-                                        <span t-esc="o.partner_bank_id.acc_number"/> - <span t-esc="o.partner_bank_id.bank_id.name"/> (<span t-esc="o.company_id.name"/>)
-                                    </p>
-                                </div> -->
                                 <t t-set="show_qr" t-value="o.display_qr_code and o.amount_residual &gt; 0"/>
                                 <div t-if="not show_qr" name="qr_code_placeholder" class="oe_structure"/>
                                 <div id="qrcode" class="d-flex mb-3 avoid-page-break-inside" t-else="">
@@ -424,17 +331,17 @@
                                 <h6 style="margin-top: 20px; font-family: 'Calibri'; font-size: 13.12px;">Vivi Odella Yudith</h6>
                             </div>
                             <div class="col-3"/>
-                            <div class="col-3" style="text-align: right;">
-                                <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Transfer To:</h6>
-                                <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Bank Name:</h6>
-                                <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Account Number:</h6>
-                                <h6 style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">Account Name:</h6>
+                            <div class="col-auto" style="text-align: right;">
+                                <h6 style="font-family: 'Calibri'; line-height: 26.24px; font-size: 13.12px; padding: 0px 4px; margin-bottom: 5px; font-weight: bold;">Transfer To:</h6>
+                                <h6 style="font-family: 'Calibri'; line-height: 26.24px; font-size: 13.12px; padding: 0px 4px; margin-bottom: 5px; font-weight: bold;">Bank Name:</h6>
+                                <h6 style="font-family: 'Calibri'; line-height: 26.24px; font-size: 13.12px; padding: 0px 4px; margin-bottom: 5px; font-weight: bold;">Account Number:</h6>
+                                <h6 style="font-family: 'Calibri'; line-height: 26.24px; font-size: 13.12px; padding: 0px 4px; margin-bottom: 5px; font-weight: bold;">Account Name:</h6>
                             </div>
-                            <div class="col-3" style="text-align: right; width: auto; max-width: 100%;">
-                                <p style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;">&#160;</p>
-                                <p style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;" t-esc="o.partner_bank_id.bank_id.name">-</p>
-                                <p style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;" t-esc="o.partner_bank_id.acc_number">-</p>
-                                <p style="font-family: 'Calibri'; line-height: 13.12px; font-size: 13.12px; margin-left: 15px; padding: 0px; margin-bottom: 5px; font-weight: bold;" t-esc="o.company_id.name">-</p>
+                            <div class="col-auto" style="text-align: right;">
+                                <p style="font-family: 'Calibri'; line-height: 26.24px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; font-weight: bold;"> </p>
+                                <p style="font-family: 'Calibri'; line-height: 26.24px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; font-weight: bold; white-space:nowrap" t-esc="o.partner_bank_id.bank_id.name">-</p>
+                                <p style="font-family: 'Calibri'; line-height: 26.24px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; font-weight: bold; white-space:nowrap" t-esc="o.partner_bank_id.acc_number">-</p>
+                                <p style="font-family: 'Calibri'; line-height: 26.24px; font-size: 13.12px; padding: 0px; margin-bottom: 5px; font-weight: bold; white-space:nowrap" t-esc="o.company_id.name">-</p>
                             </div>
                         </div>
                     </div>
