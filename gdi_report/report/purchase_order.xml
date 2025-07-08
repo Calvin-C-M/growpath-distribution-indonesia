@@ -205,11 +205,7 @@
                                         <t t-set="num" t-value="num+1"/>
                                         <td name="td_no" style="font-family: 'Calibri'; font-size: 13.12px;"><span t-esc="num"/></td>
                                         <td id="product" style="font-family: 'Calibri'; font-size: 13.12px;">
-                                            <span t-field="line.display_name"/>
-                                            <br/>
-                                            <t t-foreach="line.product_id.product_template_variant_value_ids" t-as="variant">
-                                                <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
-                                            </t>
+                                            <span t-field="line.name"/>
                                         </td>
                                         <td class="text-end" style="font-family: 'Calibri'; font-size: 13.12px;">
                                             <span t-field="line.product_qty"/>
