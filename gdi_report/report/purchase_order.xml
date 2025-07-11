@@ -205,7 +205,12 @@
                                         <t t-set="num" t-value="num+1"/>
                                         <td name="td_no" style="font-family: 'Calibri'; font-size: 13.12px;"><span t-esc="num"/></td>
                                         <td id="product" style="font-family: 'Calibri'; font-size: 13.12px;">
-                                            <span t-field="line.name"/>
+                                            <t t-if="line.name.strip().startswith(line.product_id.name) and line.name.strip()[len(line.product_id.name):].strip() == ''">
+                                                <span t-field="line.product_id.name" />
+                                            </t>
+                                            <t t-else="">
+                                                <span t-esc="line.name.replace(line.product_id.name, '').replace('\n', '').strip()" />
+                                            </t>
                                         </td>
                                         <td class="text-end" style="font-family: 'Calibri'; font-size: 13.12px;">
                                             <span t-field="line.product_qty"/>
