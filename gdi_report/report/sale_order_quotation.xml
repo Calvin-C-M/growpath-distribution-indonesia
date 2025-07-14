@@ -239,12 +239,17 @@
                                     <t t-if="not line.display_type">
                                         <t t-set="num" t-value="num+1"/>
                                         <td name="td_no" style="font-family: 'Calibri'; font-size: 13.12px;"><span t-esc="num"/></td>
-                                        <!-- <td name="td_internal_ref" style="font-family: 'Calibri'; font-size: 13.12px;"><span t-field="line.product_id.default_code"/></td> -->
                                         <td name="td_name" style="font-family: 'Calibri'; font-size: 13.12px;">
-                                            <span t-field="line.product_id.name"/>
-                                            <br/>
-                                            <t t-foreach="line.product_id.product_template_variant_value_ids" t-as="variant">
-                                                <div style="white-space: nowrap;padding:4px;border:1px solid grey;border-radius:15px;display:inline-block; font-size: 11px;"><span t-field="variant.attribute_id.name"/>:<span t-field="variant.product_attribute_value_id.name"/></div>
+                                            <t t-if="line.product_id">
+                                                <t t-if="line.name.strip().startswith(line.product_id.name) and line.name.strip()[len(line.product_id.name):].strip() == ''">
+                                                    <span t-if="line.name" t-field="line.product_id.name" t-options="{'widget': 'text'}">Bacon Burger</span>
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-esc="line.name.replace(line.product_id.name, '').replace('\n', '').strip()" t-options="{'widget': 'text'}">Bacon Burger</span>
+                                                </t>
+                                            </t>
+                                            <t t-else="">
+                                                <span t-if="line.name" t-field="line.name" t-options="{'widget': 'text'}">Bacon Burger</span>
                                             </t>
                                         </td>
                                         <td name="td_quantity" class="text-end" style="font-family: 'Calibri'; font-size: 13.12px;">
@@ -320,14 +325,6 @@
                             <p style="font-family: 'Calibri'; font-size: 13.12px;">Best Regards,</p>
                             <img src="/gdi_report/static/img/invoice_signature.jpg" style="height: 100px; width: 100px;"/>
                             <h6 style="margin-top: 20px; font-family: 'Calibri'; font-size: 13.12px;">Vivi Odella Yudith</h6>
-                            <!-- <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
-                                <p style="font-family: 'Calibri'; margin-bottom: 75px; font-size: 13.12px;">Authorized by ,</p>
-                                <h6 t-esc="doc.company_id.name" style="font-weight: bold; margin-top: 20px; font-family: 'Calibri'; font-size: 13.12px;"/>
-                            </t>
-                            <t t-if="env.context.get('proforma', False) or is_pro_forma">
-                                <p style="margin-bottom: 75px; font-family: 'Calibri'; font-size: 13.12px;">Yours faithfully,</p>
-                                <h6 t-esc="doc.company_id.name" style="font-weight: bold; margin-top: 20px; font-family: 'Calibri'; font-size: 13.12px;"/>
-                            </t> -->
                         </div>
                         <div class="col-8"/>
                     </div>
@@ -341,74 +338,6 @@
 
                 <t t-if="env.context.get('proforma', False) or is_pro_forma">
                     <div class="footer justify-content-center" style="color: 212121;">
-                        <div class="row">
-                            <div class="col-3" style="font-family: 'Calibri'; font-weight: bold;">
-                                <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.name"/>
-                                <t t-if="doc.company_id.street">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.street"/>
-                                </t>
-                                <t t-if="doc.company_id.street2"><span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px; display: block;" t-esc="doc.company_id.street2"/></t>
-                                <p style="line-height: 10px; margin-bottom: 0px;">
-                                    <t t-if="doc.company_id.city">
-                                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.city"/>
-                                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">,</span>
-                                    </t>
-                                </p>
-                                <p style="line-height: 10px; margin-bottom: 0px;">
-                                    <t t-if="doc.company_id.state_id">
-                                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.state_id.name"/>,                                    	
-                                    </t>
-                                    <t t-if="doc.company_id.country_id">
-                                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.country_id.name"/>-
-                                    </t>
-                                    <t t-if="doc.company_id.zip">
-                                        <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.zip"/>                                    	
-                                    </t>
-                                </p>
-                            </div>
-                            <div class="col-3" style="font-family: 'Calibri'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
-                                <t t-if="doc.company_id.phone">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Tel :</span>
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.phone"/><br/>
-                                </t>
-                                <!-- <t t-if="doc.company_id.fax">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Fax :</span>
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.fax"/><br/>
-                                </t> -->
-                                <t t-if="doc.company_id.website">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.website"/>                                    	
-                                </t>
-                            </div>
-                            <div class="col-3" style="font-family: 'Calibri'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
-                                <t t-if="doc.company_id.vat">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Vat Reg.No : </span>
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.vat"/><br/>
-                                </t>
-                                <t t-if="doc.company_id.business_id">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Business ID .no: </span>
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.business_id"/><br/>
-                                </t>
-                                <t t-if="doc.company_id.registered_office">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Registered Office: </span>
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.registered_office"/>
-                                </t>
-                            </div>
-                            <div class="col-3" style="font-family: 'Calibri'; font-size: 9.23px; margin-bottom: 5px; font-weight: bold;">
-                                <!-- <t t-if="doc.company_id.bank_acc_no">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">Bank account no. : </span>
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.bank_acc_no"/><br/>
-                                </t>
-                                <t t-if="doc.company_id.iban">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">IBAN: </span>
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.iban"/><br/>
-                                </t>
-                                <t t-if="doc.company_id.swift">
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;">SWIFT: </span>
-                                    <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px; margin-bottom: 5px;" t-esc="doc.company_id.swift"/>
-                                </t> -->
-                            </div>
-                        </div>
-                        <br/>
 
                         <div t-if="report_type == 'pdf'" class="text-center" style="margin-top: 5px; color: 212121; font-weight: bold;">
                             <span style="font-family: 'Calibri'; line-height: 10px; font-size: 10px;">Page</span>
