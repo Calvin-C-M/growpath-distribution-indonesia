@@ -176,7 +176,7 @@
                                                         <span t-esc="line.name.replace(line.product_id.name, '').replace('\n', '').strip()" t-options="{'widget': 'text'}">Bacon Burger</span>
                                                     </t>
                                                 </t>
-                                                <t else="">
+                                                <t t-else="">
                                                     <span t-if="line.name" t-field="line.name" t-options="{'widget': 'text'}">Bacon Burger</span>
                                                 </t>
                                             </td>
