@@ -168,11 +168,16 @@
                                             <t t-set="num" t-value="num+1"/>
                                             <td name="td_no"><span t-esc="num"/></td>
                                             <td name="account_invoice_line_name">
-                                                <t t-if="line.name.strip().startswith(line.product_id.name) and line.name.strip()[len(line.product_id.name):].strip() == ''">
-                                                    <span t-if="line.name" t-field="line.product_id.name" t-options="{'widget': 'text'}">Bacon Burger</span>
+                                                <t t-if="line.product_id">
+                                                    <t t-if="line.name.strip().startswith(line.product_id.name) and line.name.strip()[len(line.product_id.name):].strip() == ''">
+                                                        <span t-if="line.name" t-field="line.product_id.name" t-options="{'widget': 'text'}">Bacon Burger</span>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-esc="line.name.replace(line.product_id.name, '').replace('\n', '').strip()" t-options="{'widget': 'text'}">Bacon Burger</span>
+                                                    </t>
                                                 </t>
-                                                <t t-else="">
-                                                    <span t-esc="line.name.replace(line.product_id.name, '').replace('\n', '').strip()" t-options="{'widget': 'text'}">Bacon Burger</span>
+                                                <t else="">
+                                                    <span t-if="line.name" t-field="line.name" t-options="{'widget': 'text'}">Bacon Burger</span>
                                                 </t>
                                             </td>
                                             <td name="td_quantity" class="text-end">
